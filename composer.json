@@ -1,0 +1,26 @@
+{
+    "name": "modules4presta/m4p_contactwidget",
+    "description": "A floating callback request widget for PrestaShop: visitors leave a phone number or an e-mail address and the shop gets notified.",
+    "type": "prestashop-module",
+    "license": "MIT",
+    "homepage": "https://nice-code.com/pl/oferta/moduly-prestashop",
+    "authors": [
+        {
+            "name": "Modules4Presta",
+            "email": "contact@modules4presta.io",
+            "homepage": "https://nice-code.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4"
+    },
+    "autoload": {
+        "classmap": [
+            "m4p_contactwidget.php",
+            "controllers/"
+        ]
+    },
+    "config": {
+        "prepend-autoloader": false
+    }
+}

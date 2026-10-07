@@ -1,0 +1,7 @@
+New callback request
+
+Channel: {channel}
+Contact: {contact_value}
+Page: {page_url}
+Date: {date_add}
+IP address: {ip_address}

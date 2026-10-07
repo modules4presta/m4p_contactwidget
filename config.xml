@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+    <name>m4p_contactwidget</name>
+    <displayName><![CDATA[Callback request widget]]></displayName>
+    <version><![CDATA[2.0.0]]></version>
+    <description><![CDATA[A button in the corner of the shop that lets visitors leave a phone number or an e-mail address for you to call back.]]></description>
+    <author><![CDATA[Modules4Presta]]></author>
+    <tab><![CDATA[front_office_features]]></tab>
+    <confirmUninstall><![CDATA[Remove the module? The submissions collected so far are deleted with it.]]></confirmUninstall>
+    <is_configurable>1</is_configurable>
+    <need_instance>0</need_instance>
+    <limited_countries></limited_countries>
+</module>

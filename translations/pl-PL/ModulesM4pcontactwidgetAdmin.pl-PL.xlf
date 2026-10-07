@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="module" source-language="en-US" target-language="pl-PL" datatype="plaintext">
+    <body>
+      <trans-unit id="86716dafdb625d0c7d26f6f3675cda77">
+        <source>Callback request widget</source>
+        <target>Widget z prośbą o kontakt</target>
+      </trans-unit>
+      <trans-unit id="d3df40456c865be53805db585132d25a">
+        <source>A button in the corner of the shop that lets visitors leave a phone number or an e-mail address for you to call back.</source>
+        <target>Przycisk w rogu sklepu, przez który odwiedzający zostawia numer telefonu albo adres e-mail, żebyś mógł oddzwonić.</target>
+      </trans-unit>
+      <trans-unit id="c1b2aafbae0f543b685bf67796217192">
+        <source>Remove the module? The submissions collected so far are deleted with it.</source>
+        <target>Usunąć moduł? Zebrane do tej pory zgłoszenia zostaną skasowane razem z nim.</target>
+      </trans-unit>
+      <trans-unit id="6d847d3415acb49822bf8329ded79919">
+        <source>Enter a valid e-mail address for notifications.</source>
+        <target>Podaj prawidłowy adres e-mail do powiadomień.</target>
+      </trans-unit>
+      <trans-unit id="9a7e58ee13cb727cb7c4acc68f4cafe5">
+        <source>Settings saved.</source>
+        <target>Ustawienia zapisane.</target>
+      </trans-unit>
+      <trans-unit id="64ff350175e5832db859770cb849e6d7">
+        <source>— none, hide the link —</source>
+        <target>— brak, ukryj link —</target>
+      </trans-unit>
+      <trans-unit id="f4f70727dc34561dfde1a3c529b6205c">
+        <source>Settings</source>
+        <target>Ustawienia</target>
+      </trans-unit>
+      <trans-unit id="3b75aac75dc5f26614dab746da7b081d">
+        <source>Privacy policy page</source>
+        <target>Strona z polityką prywatności</target>
+      </trans-unit>
+      <trans-unit id="9bf90b7e44dd9f28fd73ac4d4fec5a35">
+        <source>The consent text in the widget links to the page you pick here.</source>
+        <target>Treść zgody w widgecie linkuje do strony wybranej tutaj.</target>
+      </trans-unit>
+      <trans-unit id="cca46a196f5059d50738b155d9a2e171">
+        <source>Notify this address</source>
+        <target>Powiadamiaj ten adres</target>
+      </trans-unit>
+      <trans-unit id="69d780255d944c3da78b50b28d8c8bb5">
+        <source>Every submission is e-mailed here. Leave it empty to send nothing — submissions still appear in the list below.</source>
+        <target>Na ten adres idzie mail po każdym zgłoszeniu. Puste pole = bez maili; zgłoszenia i tak trafiają na listę poniżej.</target>
+      </trans-unit>
+      <trans-unit id="c9cc8cce247e49bae79f15173ce97354">
+        <source>Save</source>
+        <target>Zapisz</target>
+      </trans-unit>
+      <trans-unit id="42391ec0e30a7e162e07772d69f3b688">
+        <source>Latest requests</source>
+        <target>Ostatnie zgłoszenia</target>
+      </trans-unit>
+      <trans-unit id="8bc5e1018c9e9645e98226be71778b41">
+        <source>No requests yet.</source>
+        <target>Brak zgłoszeń.</target>
+      </trans-unit>
+      <trans-unit id="44749712dbec183e983dcd78a7736c41">
+        <source>Date</source>
+        <target>Data</target>
+      </trans-unit>
+      <trans-unit id="781dc97dc62331eec3ea9ec4373a3ca8">
+        <source>Channel</source>
+        <target>Kanał</target>
+      </trans-unit>
+      <trans-unit id="bbaff12800505b22a853e8b7f4eb6a22">
+        <source>Contact</source>
+        <target>Kontakt</target>
+      </trans-unit>
+      <trans-unit id="1bbdf136f897ea2075a786bd05152095">
+        <source>Consent</source>
+        <target>Zgoda</target>
+      </trans-unit>
+      <trans-unit id="193cfc9be3b995831c6af2fea6650e60">
+        <source>Page</source>
+        <target>Strona</target>
+      </trans-unit>
+      <trans-unit id="75ba8d70e3692ba200f0e0df37b4d2ae">
+        <source>IP address</source>
+        <target>Adres IP</target>
+      </trans-unit>
+      <trans-unit id="bcc254b55c4a1babdf1dcb82c207506b">
+        <source>Phone</source>
+        <target>Telefon</target>
+      </trans-unit>
+      <trans-unit id="1e884e3078d9978e216a027ecd57fb34">
+        <source>E-mail</source>
+        <target>E-mail</target>
+      </trans-unit>
+      <trans-unit id="93cba07454f06a4a960172bbd6e2a435">
+        <source>Yes</source>
+        <target>Tak</target>
+      </trans-unit>
+      <trans-unit id="bafd7322c6e97d25b6299b5d6fe8920b">
+        <source>No</source>
+        <target>Nie</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,7 @@
+Nowe zgłoszenie z widgetu kontaktowego
+
+Kanał: {channel}
+Kontakt: {contact_value}
+Strona: {page_url}
+Data: {date_add}
+IP: {ip_address}
