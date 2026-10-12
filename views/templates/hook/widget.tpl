@@ -6,16 +6,21 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  *}
 
-<div id="m4p-contact-widget" class="m4p-contact-widget" data-token="{Tools::getToken('m4p_contactwidget')|escape:'html':'UTF-8'}">
+<div id="m4p-contact-widget" class="m4p-contact-widget" data-token="{$m4pContactToken|escape:'html':'UTF-8'}">
   <div class="m4p-contact-widget__bubble" id="m4pContactBubble" role="status">
     <button type="button" class="m4p-contact-widget__bubble-close" id="m4pContactBubbleClose" aria-label="{l s='Close' d='Modules.M4pcontactwidget.Shop'}">&times;</button>
     <p class="m4p-contact-widget__bubble-title">{l s='Need a hand?' d='Modules.M4pcontactwidget.Shop'}</p>
-    <p class="m4p-contact-widget__bubble-text">{l s='Leave your number — we will call you back.' d='Modules.M4pcontactwidget.Shop'}</p>
+    <p class="m4p-contact-widget__bubble-text">{l s='Leave your number – we will call you back.' d='Modules.M4pcontactwidget.Shop'}</p>
   </div>
 
   <button type="button" class="m4p-contact-widget__fab" id="m4pContactFab" aria-expanded="false" aria-controls="m4pContactPanel" aria-label="{l s='Request a callback' d='Modules.M4pcontactwidget.Shop'}">
-    <i class="fa fa-comment m4p-contact-widget__fab-icon-open" aria-hidden="true"></i>
-    <i class="fa fa-times m4p-contact-widget__fab-icon-close" aria-hidden="true"></i>
+    {* Inline SVG rather than an icon font: the module carries its own icons and needs nothing from the theme. *}
+    <svg class="m4p-contact-widget__fab-icon-open" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path fill="currentColor" d="M12 3c-5.02 0-9 3.36-9 7.5 0 2.3 1.23 4.36 3.17 5.73-.14 1.22-.6 2.3-1.3 3.2-.2.26.03.63.35.56 1.84-.4 3.2-1.12 4.1-1.76.85.18 1.75.27 2.68.27 5.02 0 9-3.36 9-7.5S17.02 3 12 3z"/>
+    </svg>
+    <svg class="m4p-contact-widget__fab-icon-close" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path fill="currentColor" d="M6.4 5 5 6.4 10.6 12 5 17.6 6.4 19 12 13.4 17.6 19 19 17.6 13.4 12 19 6.4 17.6 5 12 10.6z"/>
+    </svg>
   </button>
 
   <div class="m4p-contact-widget__panel" id="m4pContactPanel" role="dialog" aria-modal="false" aria-labelledby="m4pContactPanelTitle" hidden>

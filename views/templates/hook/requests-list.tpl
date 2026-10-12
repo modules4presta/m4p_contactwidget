@@ -9,6 +9,7 @@
 <div class="panel">
   <div class="panel-heading">
     <i class="icon-list"></i> {l s='Latest requests' d='Modules.M4pcontactwidget.Admin'}
+    <span class="badge">{$m4pRequests|@count}</span>
   </div>
 
   {if $m4pRequests|@count === 0}
@@ -23,6 +24,10 @@
           <th>{l s='Consent' d='Modules.M4pcontactwidget.Admin'}</th>
           <th>{l s='Page' d='Modules.M4pcontactwidget.Admin'}</th>
           <th>{l s='IP address' d='Modules.M4pcontactwidget.Admin'}</th>
+          {if $m4pMultistore}
+            <th>{l s='Shop' d='Modules.M4pcontactwidget.Admin'}</th>
+          {/if}
+          <th class="text-right">{l s='Actions' d='Modules.M4pcontactwidget.Admin'}</th>
         </tr>
       </thead>
       <tbody>
@@ -36,10 +41,19 @@
               {if $row.page_url}
                 <a href="{$row.page_url|escape:'html':'UTF-8'}" target="_blank" rel="noopener noreferrer">{$row.page_url|truncate:40:'…'|escape:'html':'UTF-8'}</a>
               {else}
-                &mdash;
+                &ndash;
               {/if}
             </td>
             <td>{$row.ip_address|escape:'html':'UTF-8'}</td>
+            {if $m4pMultistore}
+              <td>{$row.shop_name|escape:'html':'UTF-8'}</td>
+            {/if}
+            <td class="text-right">
+              <a class="btn btn-default btn-sm" href="{$row.url_delete|escape:'html':'UTF-8'}"
+                 onclick="return confirm('{l s='Delete this submission?' d='Modules.M4pcontactwidget.Admin' js=1}');">
+                <i class="icon-trash"></i> {l s='Delete' d='Modules.M4pcontactwidget.Admin'}
+              </a>
+            </td>
           </tr>
         {/foreach}
       </tbody>

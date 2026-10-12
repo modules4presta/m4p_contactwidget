@@ -11,11 +11,14 @@
  * browser, via localStorage), FAB open/close (icon swaps to an X while the
  * panel is open), channel tabs, client-side validation, and AJAX submit.
  * Server-side validation in controllers/front/submit.php is the source of
- * truth — this only avoids obviously-bad round trips.
+ * truth — this only avoids obviously-bad round trips. Every message shown
+ * here comes from the module's catalogues through Media::addJsDef.
  */
 (function () {
-  var placeholders = window.m4pContactWidgetPlaceholders || { phone: '', email: '' };
   'use strict';
+
+  var placeholders = window.m4pContactWidgetPlaceholders || { phone: '', email: '' };
+  var messages = window.m4pContactWidgetMessages || {};
 
   var BUBBLE_DISMISS_KEY = 'm4pContactBubbleDismissed';
 
@@ -42,7 +45,7 @@
     var form = document.getElementById('m4pContactForm');
     var submitBtn = document.getElementById('m4pContactSubmit');
     var errorEl = document.getElementById('m4pContactError');
-    var successEl = document.getElementById('m4pContactError') && document.getElementById('m4pContactSuccess');
+    var successEl = document.getElementById('m4pContactSuccess');
 
     function showBubble() {
       var dismissed = false;
@@ -137,18 +140,18 @@
       var consent = document.getElementById('m4pContactConsent').checked;
 
       if (!consent) {
-        showError('Zaznacz zgodę na przetwarzanie danych, aby wysłać zgłoszenie.');
+        showError(messages.consent);
         return false;
       }
 
       if (channelInput.value === 'email') {
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-          showError('Podaj prawidłowy adres e-mail.');
+          showError(messages.email);
           return false;
         }
       } else {
         if (!/^\+?[0-9]{7,15}$/.test(value.replace(/[\s-]/g, ''))) {
-          showError('Podaj prawidłowy numer telefonu.');
+          showError(messages.phone);
           return false;
         }
       }
@@ -181,17 +184,17 @@
         .then(function (json) {
           submitBtn.disabled = false;
           if (json && json.success) {
-            showSuccess(json.message || 'Dziękujemy, oddzwonimy najszybciej jak to możliwe.');
+            showSuccess(json.message || messages.success);
             if (typeof window.m4pTrack === 'function') {
               window.m4pTrack('contact_request', { channel: channelInput.value });
             }
           } else {
-            showError((json && json.message) || 'Nie udało się wysłać zgłoszenia. Spróbuj ponownie.');
+            showError((json && json.message) || messages.failure);
           }
         })
         .catch(function () {
           submitBtn.disabled = false;
-          showError('Wystąpił błąd połączenia. Spróbuj ponownie.');
+          showError(messages.network);
         });
     });
 

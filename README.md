@@ -26,15 +26,24 @@ A button sits in the corner of the shop. Clicking it opens a small panel with a 
 
 - **Phone or e-mail** — the visitor picks; phone numbers are normalised, e-mail addresses validated.
 - **Consent, with your own policy** — the checkbox is required and links to the CMS page you select.
-- **Abuse guards** — a session token, a honeypot field, and limits per browser and per address.
-- **Submissions in the back office** — the hundred most recent, with date, channel, contact, page and address.
+- **Abuse guards** — a token tied to the visitor's own cookie, a honeypot field, and limits per browser, per address and per shop.
+- **Submissions in the back office** — the hundred most recent, with date, channel, contact, page and address, each with a delete button.
+- **Retention you choose** — submissions older than the number of days you set are deleted once a day.
+- **Per shop in multistore** — every shop keeps its own list and its own settings.
+- **Its own icons** — the button draws inline SVG, so no icon font has to be present in the theme.
 - **Optional notifications** — one e-mail per submission, or none if you prefer the list.
 
 ### What it stores, and what that means for GDPR
 
 One row per submission: the channel, the contact the visitor typed, the consent flag, the page they were on, their IP address and the time. Nothing else, and nothing about customers who do not submit. The consent checkbox is required, so no row exists without it, and the text beside it links to your own policy.
 
-The rows live in one table that the module creates on install and drops on uninstall — so uninstalling is also how you delete the data. If your retention policy is shorter than that, delete rows directly; there is no hidden copy anywhere else.
+Three ways to get the data out again, so a request to be forgotten does not need database access:
+
+- **The delete button** next to every row in the back-office list.
+- **The retention setting** — submissions older than the number of days you choose are deleted once a day, by default after a year. Set it to 0 to keep them until you delete them yourself.
+- **PrestaShop's own GDPR module** — with `psgdpr` installed, a customer's submissions are part of the data it exports and of the data it erases, matched on the e-mail address they left.
+
+The rows live in one table that the module creates on install and drops on uninstall, so uninstalling deletes everything as well. There is no hidden copy anywhere else.
 
 ## Compatibility
 
@@ -42,17 +51,18 @@ The rows live in one table that the module creates on install and drops on unins
 |---|---|
 | PrestaShop | 1.7.6 – 9.x |
 | PHP | 7.4+ |
-| Requirements | none — no external service, no captcha key |
-| Multistore | Submissions record the shop they came from |
+| Requirements | none — no external service, no captcha key, no icon font |
+| Multistore | Supported — each shop has its own submissions, its own list and its own settings; a deleted shop takes its submissions with it |
 | Themes | Renders in `displayFooter`; the widget positions itself and needs no theme changes |
 
-The module overrides no core class. It creates one table and two settings, and removes both when uninstalled.
+The module overrides no core class. It creates one table and its settings, and removes both when uninstalled. With `psgdpr` installed it answers that module's export and erasure hooks.
 
 ## Installation
 
 1. Upload and install the module from **Modules → Module Manager**.
 2. Open its configuration and pick the CMS page holding your privacy policy.
 3. Set the address that should be notified, or leave it empty to rely on the list.
+4. Decide how long submissions are kept — a year by default.
 
 The privacy policy page is guessed on install from your CMS pages, so the link usually works straight away — check that it points where you expect.
 
@@ -62,14 +72,20 @@ The privacy policy page is guessed on install from your CMS pages, so the link u
 |---|---|
 | **Privacy policy page** | The CMS page the consent text links to. Pick "none" to hide the link. |
 | **Notify this address** | Where each submission is e-mailed. Empty means no e-mail; submissions still appear in the list. |
+| **Keep submissions for** | Days a submission is kept before it is deleted automatically. 0 keeps everything until you delete it yourself. |
+
+In multistore all three belong to the shop selected in the selector, so one shop can notify a different address than another.
 
 ## Frequently asked questions
 
 **Does it need a captcha key or an external service?**
-No. The guards are a session token, a hidden honeypot field and rate limits counted in your own database.
+No. The guards are a token tied to the visitor's own cookie, a hidden honeypot field and rate limits counted in your own database.
 
 **Can someone flood it?**
-One submission per 20 seconds per browser and ten per hour per address. A caller who drops cookies still hits the address limit.
+One submission per 20 seconds per browser, ten per hour per address and a hundred per hour per shop. The per-shop figure is the backstop: behind a proxy the shop sees the address the request claims to come from, so a limit counted per address alone would not hold on its own.
+
+**Someone asks me to delete their data. Where is it?**
+In the list on the configuration page — delete the row there. With `psgdpr` installed, its own erasure request covers this module too, and the retention setting clears old submissions without anyone asking.
 
 **What happens to submissions when I uninstall?**
 They are deleted with the module's table. Export them first if you need them.

@@ -22,6 +22,14 @@ class M4p_ContactWidgetSubmitModuleFrontController extends ModuleFrontController
     /** How many submissions one address may send in an hour. */
     private const MAX_PER_IP_PER_HOUR = 10;
 
+    /**
+     * How many submissions one shop accepts in an hour, whatever address they
+     * claim to come from. Behind a proxy the shop sees the address the request
+     * carries in X-Forwarded-For, so the per-address count alone can be walked
+     * around by varying that header.
+     */
+    private const MAX_PER_SHOP_PER_HOUR = 100;
+
     public function __construct()
     {
         $this->ajax = true;
@@ -42,9 +50,9 @@ class M4p_ContactWidgetSubmitModuleFrontController extends ModuleFrontController
             $this->respond(false, $this->trans('Wrong request.', [], 'Modules.M4pcontactwidget.Shop'));
         }
 
-        $expectedToken = Tools::getToken('m4p_contactwidget');
+        $expectedToken = M4p_ContactWidget::formToken($this->context->cookie);
         $token = (string) Tools::getValue('m4p_contact_token');
-        if (!hash_equals($expectedToken, $token)) {
+        if ($expectedToken === '' || !hash_equals($expectedToken, $token)) {
             $this->respond(false, $this->trans('Your session expired. Refresh the page and try again.', [], 'Modules.M4pcontactwidget.Shop'));
         }
 
@@ -59,8 +67,10 @@ class M4p_ContactWidgetSubmitModuleFrontController extends ModuleFrontController
         }
 
         // The cookie guard above is per browser and a caller who drops cookies
-        // walks around it, so the address is counted against the stored rows too.
-        if ($this->recentFromAddress() >= self::MAX_PER_IP_PER_HOUR) {
+        // walks around it, so the stored rows are counted too: by address, and
+        // by shop as the backstop that holds even when the address varies.
+        if ($this->recentFromAddress() >= self::MAX_PER_IP_PER_HOUR
+            || $this->recentForShop() >= self::MAX_PER_SHOP_PER_HOUR) {
             $this->respond(false, $this->trans('Your request has been sent. Please wait a moment before sending another.', [], 'Modules.M4pcontactwidget.Shop'));
         }
 
@@ -92,10 +102,14 @@ class M4p_ContactWidgetSubmitModuleFrontController extends ModuleFrontController
         }
 
         $pageUrl = $this->ownUrl((string) Tools::getValue('page_url'));
+
         $dateAdd = date('Y-m-d H:i:s');
 
-        // Db::insert() binds/escapes every value (pSQL under the hood) — no
-        // string concatenation anywhere, so this is not SQL-injectable.
+        // Db::insert() escapes every value it is given — no string
+        // concatenation anywhere, so this is not SQL-injectable. The time comes
+        // from PHP, like every other date PrestaShop writes, and the rate
+        // windows below are computed in PHP as well, so nothing here depends on
+        // the time zone the database session happens to run in.
         $inserted = Db::getInstance()->insert(M4p_ContactWidget::TABLE, [
             'channel' => pSQL($channel),
             'contact_value' => pSQL($value),
@@ -103,7 +117,7 @@ class M4p_ContactWidgetSubmitModuleFrontController extends ModuleFrontController
             'id_shop' => (int) $this->context->shop->id,
             'ip_address' => pSQL((string) Tools::getRemoteAddr()),
             'page_url' => pSQL($pageUrl),
-            'date_add' => $dateAdd,
+            'date_add' => pSQL($dateAdd),
         ]);
 
         if (!$inserted) {
@@ -129,13 +143,21 @@ class M4p_ContactWidgetSubmitModuleFrontController extends ModuleFrontController
             return;
         }
 
+        // The shop owner reads this, not the visitor, so it goes out in the
+        // shop's own language rather than whichever one the visitor browsed in.
+        $idLang = $this->notifyLanguageId();
+        $language = new Language($idLang);
+        $locale = empty($language->locale) ? null : $language->locale;
+
         try {
             Mail::send(
-                (int) $this->context->language->id,
+                $idLang,
                 'contact_request',
-                $this->trans('New callback request', [], 'Modules.M4pcontactwidget.Shop'),
+                $this->trans('New callback request', [], 'Modules.M4pcontactwidget.Shop', $locale),
                 [
-                    '{channel}' => $channel === 'phone' ? $this->trans('Phone', [], 'Modules.M4pcontactwidget.Shop') : $this->trans('E-mail', [], 'Modules.M4pcontactwidget.Shop'),
+                    '{channel}' => $channel === 'phone'
+                        ? $this->trans('Phone', [], 'Modules.M4pcontactwidget.Shop', $locale)
+                        : $this->trans('E-mail', [], 'Modules.M4pcontactwidget.Shop', $locale),
                     '{contact_value}' => $value,
                     '{page_url}' => $pageUrl,
                     '{date_add}' => $dateAdd,
@@ -154,13 +176,49 @@ class M4p_ContactWidgetSubmitModuleFrontController extends ModuleFrontController
         }
     }
 
+    /**
+     * The shop's default language when the module carries a template for it,
+     * otherwise the first installed language that has one.
+     */
+    private function notifyLanguageId(): int
+    {
+        $default = (int) Configuration::get('PS_LANG_DEFAULT');
+        $candidates = [$default];
+        foreach (Language::getLanguages(false) as $language) {
+            $candidates[] = (int) $language['id_lang'];
+        }
+
+        foreach (array_unique($candidates) as $idLang) {
+            $iso = Language::getIsoById($idLang);
+            if ($iso && file_exists(_PS_MODULE_DIR_ . 'm4p_contactwidget/mails/' . $iso . '/contact_request.html')) {
+                return (int) $idLang;
+            }
+        }
+
+        return $default;
+    }
+
     private function recentFromAddress(): int
     {
         return (int) Db::getInstance()->getValue(
             'SELECT COUNT(*) FROM `' . _DB_PREFIX_ . M4p_ContactWidget::TABLE . '`
-             WHERE `ip_address` = "' . pSQL((string) Tools::getRemoteAddr()) . '"
-               AND `date_add` > DATE_SUB(NOW(), INTERVAL 1 HOUR)'
+             WHERE `ip_address` = \'' . pSQL((string) Tools::getRemoteAddr()) . '\'
+               AND `date_add` > \'' . pSQL(self::oneHourAgo()) . '\''
         );
+    }
+
+    private function recentForShop(): int
+    {
+        return (int) Db::getInstance()->getValue(
+            'SELECT COUNT(*) FROM `' . _DB_PREFIX_ . M4p_ContactWidget::TABLE . '`
+             WHERE `id_shop` = ' . (int) $this->context->shop->id . '
+               AND `date_add` > \'' . pSQL(self::oneHourAgo()) . '\''
+        );
+    }
+
+    private static function oneHourAgo(): string
+    {
+        return date('Y-m-d H:i:s', time() - 3600);
     }
 
     /**

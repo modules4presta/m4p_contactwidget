@@ -2,7 +2,7 @@
 <module>
     <name>m4p_contactwidget</name>
     <displayName><![CDATA[Widget z prośbą o kontakt]]></displayName>
-    <version><![CDATA[2.0.0]]></version>
+    <version><![CDATA[2.1.0]]></version>
     <description><![CDATA[Przycisk w rogu sklepu, przez który odwiedzający zostawia numer telefonu albo adres e-mail, żebyś mógł oddzwonić.]]></description>
     <author><![CDATA[Modules4Presta]]></author>
     <tab><![CDATA[front_office_features]]></tab>

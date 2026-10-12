@@ -10,26 +10,6 @@
         <source>e.g. jan.kowalski@company.com</source>
         <target>e.g. jan.kowalski@company.com</target>
       </trans-unit>
-      <trans-unit id="9867a9bff28118fbd6d97c37d0ffe2b5">
-        <source>Wrong request.</source>
-        <target>Wrong request.</target>
-      </trans-unit>
-      <trans-unit id="5c7e6b4597190c67c6146a24444bbb3b">
-        <source>Your session expired. Refresh the page and try again.</source>
-        <target>Your session expired. Refresh the page and try again.</target>
-      </trans-unit>
-      <trans-unit id="2fb34c2cd8e8ead010444379bbac8fc6">
-        <source>Thank you, we will get back to you as soon as we can.</source>
-        <target>Thank you, we will get back to you as soon as we can.</target>
-      </trans-unit>
-      <trans-unit id="3936dfea7b1aff668e40cabb0a10b1ef">
-        <source>Your request has been sent. Please wait a moment before sending another.</source>
-        <target>Your request has been sent. Please wait a moment before sending another.</target>
-      </trans-unit>
-      <trans-unit id="0257321a74762e11ee4244884fad3fd9">
-        <source>Wrong contact channel.</source>
-        <target>Wrong contact channel.</target>
-      </trans-unit>
       <trans-unit id="3b878e896fb30a25420104417baf42e5">
         <source>Consent to processing your data is required.</source>
         <target>Consent to processing your data is required.</target>
@@ -41,6 +21,34 @@
       <trans-unit id="dfada3cb254f01282dc35095ba6da024">
         <source>Enter a valid phone number.</source>
         <target>Enter a valid phone number.</target>
+      </trans-unit>
+      <trans-unit id="2fb34c2cd8e8ead010444379bbac8fc6">
+        <source>Thank you, we will get back to you as soon as we can.</source>
+        <target>Thank you, we will get back to you as soon as we can.</target>
+      </trans-unit>
+      <trans-unit id="125a4e3fce4b154f96a258f02e62f9e7">
+        <source>The request could not be sent. Please try again.</source>
+        <target>The request could not be sent. Please try again.</target>
+      </trans-unit>
+      <trans-unit id="d7caa11dc409644fdf6719c2a15dbb3b">
+        <source>Connection problem. Please try again.</source>
+        <target>Connection problem. Please try again.</target>
+      </trans-unit>
+      <trans-unit id="9867a9bff28118fbd6d97c37d0ffe2b5">
+        <source>Wrong request.</source>
+        <target>Wrong request.</target>
+      </trans-unit>
+      <trans-unit id="5c7e6b4597190c67c6146a24444bbb3b">
+        <source>Your session expired. Refresh the page and try again.</source>
+        <target>Your session expired. Refresh the page and try again.</target>
+      </trans-unit>
+      <trans-unit id="3936dfea7b1aff668e40cabb0a10b1ef">
+        <source>Your request has been sent. Please wait a moment before sending another.</source>
+        <target>Your request has been sent. Please wait a moment before sending another.</target>
+      </trans-unit>
+      <trans-unit id="0257321a74762e11ee4244884fad3fd9">
+        <source>Wrong contact channel.</source>
+        <target>Wrong contact channel.</target>
       </trans-unit>
       <trans-unit id="8644ac105927b621fe3dddaf8ba20a44">
         <source>The request could not be saved. Please try again.</source>
@@ -66,9 +74,9 @@
         <source>Need a hand?</source>
         <target>Need a hand?</target>
       </trans-unit>
-      <trans-unit id="276b5d511ba0a00db641a42bf94f74d1">
-        <source>Leave your number — we will call you back.</source>
-        <target>Leave your number — we will call you back.</target>
+      <trans-unit id="23dbc2a21c850c7ad1997d1de733a33e">
+        <source>Leave your number – we will call you back.</source>
+        <target>Leave your number – we will call you back.</target>
       </trans-unit>
       <trans-unit id="934a5d07b81c24dbf292e3156b0bec9e">
         <source>Request a callback</source>

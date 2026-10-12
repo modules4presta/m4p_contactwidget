@@ -2,7 +2,7 @@
 <module>
     <name>m4p_contactwidget</name>
     <displayName><![CDATA[Callback request widget]]></displayName>
-    <version><![CDATA[2.0.0]]></version>
+    <version><![CDATA[2.1.0]]></version>
     <description><![CDATA[A button in the corner of the shop that lets visitors leave a phone number or an e-mail address for you to call back.]]></description>
     <author><![CDATA[Modules4Presta]]></author>
     <tab><![CDATA[front_office_features]]></tab>

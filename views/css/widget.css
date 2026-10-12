@@ -43,7 +43,8 @@
 
 .m4p-contact-widget__fab-icon-open,
 .m4p-contact-widget__fab-icon-close {
-  font-size: 22px;
+  width: 22px;
+  height: 22px;
   position: absolute;
   transition: opacity 0.15s ease, transform 0.15s ease;
 }
@@ -295,7 +296,8 @@
 
   .m4p-contact-widget__fab-icon-open,
   .m4p-contact-widget__fab-icon-close {
-    font-size: 18px;
+    width: 18px;
+    height: 18px;
   }
 
   .m4p-contact-widget__bubble {

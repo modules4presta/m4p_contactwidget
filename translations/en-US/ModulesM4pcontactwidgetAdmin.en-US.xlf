@@ -14,21 +14,29 @@
         <source>Remove the module? The submissions collected so far are deleted with it.</source>
         <target>Remove the module? The submissions collected so far are deleted with it.</target>
       </trans-unit>
+      <trans-unit id="66dff4bc6149738292b7b2737e7e2e8c">
+        <source>Invalid security token.</source>
+        <target>Invalid security token.</target>
+      </trans-unit>
+      <trans-unit id="003fefd4ee223f1499127c56deebbaa2">
+        <source>Submission deleted.</source>
+        <target>Submission deleted.</target>
+      </trans-unit>
       <trans-unit id="6d847d3415acb49822bf8329ded79919">
         <source>Enter a valid e-mail address for notifications.</source>
         <target>Enter a valid e-mail address for notifications.</target>
+      </trans-unit>
+      <trans-unit id="f8c91b90df1830866d492cfa7de4c2c8">
+        <source>Enter the number of days as 0 or more.</source>
+        <target>Enter the number of days as 0 or more.</target>
       </trans-unit>
       <trans-unit id="9a7e58ee13cb727cb7c4acc68f4cafe5">
         <source>Settings saved.</source>
         <target>Settings saved.</target>
       </trans-unit>
-      <trans-unit id="64ff350175e5832db859770cb849e6d7">
-        <source>— none, hide the link —</source>
-        <target>— none, hide the link —</target>
-      </trans-unit>
-      <trans-unit id="f4f70727dc34561dfde1a3c529b6205c">
-        <source>Settings</source>
-        <target>Settings</target>
+      <trans-unit id="ddcabab231b371f01cc2e752cdef536e">
+        <source>– none, hide the link –</source>
+        <target>– none, hide the link –</target>
       </trans-unit>
       <trans-unit id="3b75aac75dc5f26614dab746da7b081d">
         <source>Privacy policy page</source>
@@ -42,9 +50,29 @@
         <source>Notify this address</source>
         <target>Notify this address</target>
       </trans-unit>
-      <trans-unit id="69d780255d944c3da78b50b28d8c8bb5">
-        <source>Every submission is e-mailed here. Leave it empty to send nothing — submissions still appear in the list below.</source>
-        <target>Every submission is e-mailed here. Leave it empty to send nothing — submissions still appear in the list below.</target>
+      <trans-unit id="d5e1198b422c97ee761d68f08ebcdd66">
+        <source>Every submission is e-mailed here. Leave it empty to send nothing – submissions still appear in the list below.</source>
+        <target>Every submission is e-mailed here. Leave it empty to send nothing – submissions still appear in the list below.</target>
+      </trans-unit>
+      <trans-unit id="af1da245ffc0fb1522398a4d9e6e9882">
+        <source>Keep submissions for</source>
+        <target>Keep submissions for</target>
+      </trans-unit>
+      <trans-unit id="44fdec47036f482b68b748f9d786801b">
+        <source>days</source>
+        <target>days</target>
+      </trans-unit>
+      <trans-unit id="0ab2f47a3ec6f003712c5a635f67b0e5">
+        <source>Older submissions are deleted once a day. Enter 0 to keep them until you delete them yourself.</source>
+        <target>Older submissions are deleted once a day. Enter 0 to keep them until you delete them yourself.</target>
+      </trans-unit>
+      <trans-unit id="b116617f81ca773f28a35c4b94e0a134">
+        <source>The three settings belong to the shop selected above.</source>
+        <target>The three settings belong to the shop selected above.</target>
+      </trans-unit>
+      <trans-unit id="f4f70727dc34561dfde1a3c529b6205c">
+        <source>Settings</source>
+        <target>Settings</target>
       </trans-unit>
       <trans-unit id="c9cc8cce247e49bae79f15173ce97354">
         <source>Save</source>
@@ -82,6 +110,14 @@
         <source>IP address</source>
         <target>IP address</target>
       </trans-unit>
+      <trans-unit id="9f82518d468b9fee614fcc92f76bb163">
+        <source>Shop</source>
+        <target>Shop</target>
+      </trans-unit>
+      <trans-unit id="06df33001c1d7187fdd81ea1f5b277aa">
+        <source>Actions</source>
+        <target>Actions</target>
+      </trans-unit>
       <trans-unit id="bcc254b55c4a1babdf1dcb82c207506b">
         <source>Phone</source>
         <target>Phone</target>
@@ -97,6 +133,14 @@
       <trans-unit id="bafd7322c6e97d25b6299b5d6fe8920b">
         <source>No</source>
         <target>No</target>
+      </trans-unit>
+      <trans-unit id="393fb0bd72576fb3cc1da7df9a150917">
+        <source>Delete this submission?</source>
+        <target>Delete this submission?</target>
+      </trans-unit>
+      <trans-unit id="f2a6c498fb90ee345d997f888fce3b18">
+        <source>Delete</source>
+        <target>Delete</target>
       </trans-unit>
     </body>
   </file>
