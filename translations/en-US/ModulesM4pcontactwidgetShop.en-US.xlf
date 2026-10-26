@@ -1,18 +1,38 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="UTF-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
   <file original="module" source-language="en-US" target-language="en-US" datatype="plaintext">
     <body>
-      <trans-unit id="7129596d35ebdd4794d4dd2f77f8bbfd">
-        <source>e.g. +48 123 456 789</source>
-        <target>e.g. +48 123 456 789</target>
+      <trans-unit id="4bd9ef088a14b5f6fd9ef86e6f33037f">
+        <source>Need help?</source>
+        <target>Need help?</target>
       </trans-unit>
-      <trans-unit id="04b5d81448448ce88472e03120667ef8">
-        <source>e.g. jan.kowalski@company.com</source>
-        <target>e.g. jan.kowalski@company.com</target>
+      <trans-unit id="b85a78b94687e6a461243ef91761f65d">
+        <source>Call or write to us, or leave your number and we will call you back.</source>
+        <target>Call or write to us, or leave your number and we will call you back.</target>
       </trans-unit>
-      <trans-unit id="3b878e896fb30a25420104417baf42e5">
-        <source>Consent to processing your data is required.</source>
-        <target>Consent to processing your data is required.</target>
+      <trans-unit id="c75dacd985f6bf6b522e1b94fda96f89">
+        <source>Have a question? We are happy to help.</source>
+        <target>Have a question? We are happy to help.</target>
+      </trans-unit>
+      <trans-unit id="8e9d94503c4f11436603d80d02f40a07">
+        <source>Your session has expired. Refresh the page and try again.</source>
+        <target>Your session has expired. Refresh the page and try again.</target>
+      </trans-unit>
+      <trans-unit id="3ed61eb8a02faa01c836855c8127be2d">
+        <source>Thank you, we will contact you as soon as possible.</source>
+        <target>Thank you, we will contact you as soon as possible.</target>
+      </trans-unit>
+      <trans-unit id="8f81bb8da0c0c4ceaace58460b965e65">
+        <source>Your request has already been sent. Please wait a moment before sending another one.</source>
+        <target>Your request has already been sent. Please wait a moment before sending another one.</target>
+      </trans-unit>
+      <trans-unit id="777f9e90cf251ec077f633406368c632">
+        <source>Invalid request.</source>
+        <target>Invalid request.</target>
+      </trans-unit>
+      <trans-unit id="a92e6734a018624b519192bfcd136394">
+        <source>Tick the consent to the processing of your data.</source>
+        <target>Tick the consent to the processing of your data.</target>
       </trans-unit>
       <trans-unit id="2b3e9729e125a5173fe20e1dc37d4271">
         <source>Enter a valid e-mail address.</source>
@@ -22,41 +42,21 @@
         <source>Enter a valid phone number.</source>
         <target>Enter a valid phone number.</target>
       </trans-unit>
-      <trans-unit id="2fb34c2cd8e8ead010444379bbac8fc6">
-        <source>Thank you, we will get back to you as soon as we can.</source>
-        <target>Thank you, we will get back to you as soon as we can.</target>
-      </trans-unit>
-      <trans-unit id="125a4e3fce4b154f96a258f02e62f9e7">
-        <source>The request could not be sent. Please try again.</source>
-        <target>The request could not be sent. Please try again.</target>
-      </trans-unit>
-      <trans-unit id="d7caa11dc409644fdf6719c2a15dbb3b">
-        <source>Connection problem. Please try again.</source>
-        <target>Connection problem. Please try again.</target>
-      </trans-unit>
-      <trans-unit id="9867a9bff28118fbd6d97c37d0ffe2b5">
-        <source>Wrong request.</source>
-        <target>Wrong request.</target>
-      </trans-unit>
-      <trans-unit id="5c7e6b4597190c67c6146a24444bbb3b">
-        <source>Your session expired. Refresh the page and try again.</source>
-        <target>Your session expired. Refresh the page and try again.</target>
-      </trans-unit>
-      <trans-unit id="3936dfea7b1aff668e40cabb0a10b1ef">
-        <source>Your request has been sent. Please wait a moment before sending another.</source>
-        <target>Your request has been sent. Please wait a moment before sending another.</target>
-      </trans-unit>
-      <trans-unit id="0257321a74762e11ee4244884fad3fd9">
-        <source>Wrong contact channel.</source>
-        <target>Wrong contact channel.</target>
-      </trans-unit>
       <trans-unit id="8644ac105927b621fe3dddaf8ba20a44">
         <source>The request could not be saved. Please try again.</source>
         <target>The request could not be saved. Please try again.</target>
       </trans-unit>
-      <trans-unit id="2d89a15518fb867219c01e36c8505cc2">
-        <source>New callback request</source>
-        <target>New callback request</target>
+      <trans-unit id="43c9a47002a5baca41771ca51bb3aac6">
+        <source>Connection error. Please try again.</source>
+        <target>Connection error. Please try again.</target>
+      </trans-unit>
+      <trans-unit id="d3d2e617335f08df83599665eef8a418">
+        <source>Close</source>
+        <target>Close</target>
+      </trans-unit>
+      <trans-unit id="02d4482d332e1aef3437cd61c9bcc624">
+        <source>Contact us</source>
+        <target>Contact us</target>
       </trans-unit>
       <trans-unit id="bcc254b55c4a1babdf1dcb82c207506b">
         <source>Phone</source>
@@ -66,33 +66,49 @@
         <source>E-mail</source>
         <target>E-mail</target>
       </trans-unit>
-      <trans-unit id="d3d2e617335f08df83599665eef8a418">
-        <source>Close</source>
-        <target>Close</target>
+      <trans-unit id="80a0c205cd57b22fca7f174253870300">
+        <source>Opening hours</source>
+        <target>Opening hours</target>
       </trans-unit>
-      <trans-unit id="aeaea78cd876bdd25a27b6591720b867">
-        <source>Need a hand?</source>
-        <target>Need a hand?</target>
+      <trans-unit id="a6fb493e0d6afa32b3ca332ea78d9d1c">
+        <source>We will call you back</source>
+        <target>We will call you back</target>
       </trans-unit>
-      <trans-unit id="23dbc2a21c850c7ad1997d1de733a33e">
-        <source>Leave your number – we will call you back.</source>
-        <target>Leave your number – we will call you back.</target>
+      <trans-unit id="b9d159395d9b9dc3b638b7803399aca3">
+        <source>How should we contact you?</source>
+        <target>How should we contact you?</target>
       </trans-unit>
-      <trans-unit id="934a5d07b81c24dbf292e3156b0bec9e">
-        <source>Request a callback</source>
-        <target>Request a callback</target>
+      <trans-unit id="521daf39e372791baf8221f9ff0727e1">
+        <source>Your phone number</source>
+        <target>Your phone number</target>
       </trans-unit>
-      <trans-unit id="f479bb4a53c7fabd268b63db39669c8c">
-        <source>Leave a phone number or an e-mail address and we will get back to you as soon as we can.</source>
-        <target>Leave a phone number or an e-mail address and we will get back to you as soon as we can.</target>
+      <trans-unit id="fd928a16a39fcd6ed0c06ab084309228">
+        <source>e.g. 600 100 200</source>
+        <target>e.g. 600 100 200</target>
       </trans-unit>
-      <trans-unit id="3b435012dbe04dead6798d782cc47cda">
-        <source>I agree to my personal data being processed so that you can contact me back.</source>
-        <target>I agree to my personal data being processed so that you can contact me back.</target>
+      <trans-unit id="7df61a0962e018c22de96180a1eef6b6">
+        <source>We will write back to you</source>
+        <target>We will write back to you</target>
+      </trans-unit>
+      <trans-unit id="bc82c84acc0c68f760ecd5bac0dddc7d">
+        <source>Your e-mail address</source>
+        <target>Your e-mail address</target>
+      </trans-unit>
+      <trans-unit id="b2217640fbc13f12d39a3292cc88ab21">
+        <source>e.g. name@company.com</source>
+        <target>e.g. name@company.com</target>
+      </trans-unit>
+      <trans-unit id="25d021d9d39b195ff3dcab932ee59448">
+        <source>I agree to the processing of my personal data in order to be contacted.</source>
+        <target>I agree to the processing of my personal data in order to be contacted.</target>
       </trans-unit>
       <trans-unit id="56c34c6410dd45c5cec44149ad0ce037">
         <source>Privacy policy</source>
         <target>Privacy policy</target>
+      </trans-unit>
+      <trans-unit id="76dff9cf9e73cd3db7c2e7b3b2a524f6">
+        <source>Call me back</source>
+        <target>Call me back</target>
       </trans-unit>
     </body>
   </file>

@@ -15,18 +15,25 @@ if (!defined('_PS_VERSION_')) {
 }
 
 /**
- * Floating "request a callback" widget: a button in the corner of the shop
- * opening a short phone or e-mail form with a consent checkbox.
- *
- * Self-contained — own table, own endpoint — so it depends on no other module.
+ * Floating contact widget in the corner of the shop: phone, e-mail and opening hours from the back
+ * office, plus a "we will call you back" form (phone or e-mail with consent) stored in its own table.
  */
 class M4p_ContactWidget extends Module
 {
     public const TABLE = 'm4p_contact_request';
+    public const ADMIN_CONTROLLER = 'AdminM4pContactRequests';
     public const CFG_PRIVACY_CMS_ID = 'M4P_CONTACTWIDGET_PRIVACY_CMS_ID';
     public const CFG_NOTIFY_EMAIL = 'M4P_CONTACTWIDGET_NOTIFY_EMAIL';
     public const CFG_RETENTION_DAYS = 'M4P_CONTACTWIDGET_RETENTION_DAYS';
     public const CFG_LAST_PURGE = 'M4P_CONTACTWIDGET_LAST_PURGE';
+    public const CFG_PHONE = 'M4P_CONTACTWIDGET_PHONE';
+    public const CFG_EMAIL = 'M4P_CONTACTWIDGET_EMAIL';
+    public const CFG_MODULE_CSS = 'M4P_CONTACTWIDGET_MODULE_CSS';
+    /** Per-language texts. */
+    public const CFG_TITLE = 'M4P_CONTACTWIDGET_TITLE';
+    public const CFG_INTRO = 'M4P_CONTACTWIDGET_INTRO';
+    public const CFG_HOURS = 'M4P_CONTACTWIDGET_HOURS';
+    public const CFG_BUBBLE = 'M4P_CONTACTWIDGET_BUBBLE';
 
     /** Name of the cookie entry holding the per-visitor form secret. */
     public const COOKIE_NONCE = 'm4p_contact_nonce';
@@ -36,7 +43,16 @@ class M4p_ContactWidget extends Module
         self::CFG_NOTIFY_EMAIL,
         self::CFG_RETENTION_DAYS,
         self::CFG_LAST_PURGE,
+        self::CFG_PHONE,
+        self::CFG_EMAIL,
+        self::CFG_MODULE_CSS,
+        self::CFG_TITLE,
+        self::CFG_INTRO,
+        self::CFG_HOURS,
+        self::CFG_BUBBLE,
     ];
+
+    private const LANG_KEYS = [self::CFG_TITLE, self::CFG_INTRO, self::CFG_HOURS, self::CFG_BUBBLE];
 
     /** Rows kept per shop unless the setting says otherwise. */
     private const DEFAULT_RETENTION_DAYS = 365;
@@ -44,11 +60,16 @@ class M4p_ContactWidget extends Module
     /** At most one purge per shop in this many seconds. */
     private const PURGE_INTERVAL = 86400;
 
+    /** Pages without the widget: the cart and the checkout have their own help line. */
+    private const HIDDEN_ON = ['cart', 'order', 'order-confirmation'];
+
+    private const ICONS = ['phone', 'envelope', 'clock', 'comment-dots', 'xmark', 'paper-plane', 'circle-check'];
+
     public function __construct()
     {
         $this->name = 'm4p_contactwidget';
         $this->tab = 'front_office_features';
-        $this->version = '2.1.0';
+        $this->version = '3.0.0';
         $this->author = 'Modules4Presta';
         $this->need_instance = 0;
         $this->bootstrap = true;
@@ -56,33 +77,28 @@ class M4p_ContactWidget extends Module
 
         parent::__construct();
 
-        $this->displayName = $this->trans('Callback request widget', [], 'Modules.M4pcontactwidget.Admin');
-        $this->description = $this->trans('A button in the corner of the shop that lets visitors leave a phone number or an e-mail address for you to call back.', [], 'Modules.M4pcontactwidget.Admin');
+        $this->displayName = $this->trans('Contact widget', [], 'Modules.M4pcontactwidget.Admin');
+        $this->description = $this->trans('A floating button in the corner of the shop with the phone, e-mail, opening hours and a "we will call you back" form.', [], 'Modules.M4pcontactwidget.Admin');
         $this->confirmUninstall = $this->trans('Remove the module? The submissions collected so far are deleted with it.', [], 'Modules.M4pcontactwidget.Admin');
     }
 
     public function install(): bool
     {
-        // Best-effort default: point at the CMS page that looks like the
-        // privacy policy, so the link works out of the box; admin can
-        // change it in Configure without touching code.
+        // Best guess for the privacy policy page, so the consent link works out of the box.
         $guessedCmsId = (int) Db::getInstance()->getValue(
             'SELECT c.id_cms FROM `' . _DB_PREFIX_ . 'cms` c
              JOIN `' . _DB_PREFIX_ . 'cms_lang` cl ON cl.id_cms = c.id_cms
-             WHERE cl.link_rewrite LIKE \'%polityka-prywatnosci%\' OR cl.link_rewrite LIKE \'%privacy%\''
+             WHERE c.active = 1 AND (cl.link_rewrite LIKE \'%polityka-prywatnosci%\' OR cl.link_rewrite LIKE \'%privacy%\')'
         );
 
         Configuration::updateValue(self::CFG_PRIVACY_CMS_ID, $guessedCmsId);
         Configuration::updateValue(self::CFG_NOTIFY_EMAIL, Configuration::get('PS_SHOP_EMAIL'));
-        Configuration::updateValue(self::CFG_RETENTION_DAYS, self::DEFAULT_RETENTION_DAYS);
+        $this->applyDefaults();
 
         return parent::install()
             && $this->installDb()
-            && $this->registerHook('displayFooter')
-            && $this->registerHook('actionFrontControllerSetMedia')
-            && $this->registerHook('actionExportGDPRData')
-            && $this->registerHook('actionDeleteGDPRCustomer')
-            && $this->registerHook('actionObjectShopDeleteAfter');
+            && $this->installTab()
+            && $this->registerHooks();
     }
 
     public function uninstall(): bool
@@ -93,14 +109,85 @@ class M4p_ContactWidget extends Module
             Configuration::deleteByName($key);
         }
 
-        return parent::uninstall();
+        return $this->uninstallTab() && parent::uninstall();
+    }
+
+    public function registerHooks(): bool
+    {
+        return $this->registerHook('displayBeforeBodyClosingTag')
+            && $this->registerHook('actionFrontControllerSetMedia')
+            && $this->registerHook('actionExportGDPRData')
+            && $this->registerHook('actionDeleteGDPRCustomer')
+            && $this->registerHook('actionObjectShopDeleteAfter');
+    }
+
+    /**
+     * Customers > Contact widget requests.
+     */
+    public function installTab(): bool
+    {
+        if (Tab::getIdFromClassName(self::ADMIN_CONTROLLER)) {
+            return true;
+        }
+
+        $tab = new Tab();
+        $tab->class_name = self::ADMIN_CONTROLLER;
+        $tab->module = $this->name;
+        $tab->id_parent = (int) Tab::getIdFromClassName('AdminParentCustomer');
+        $tab->active = true;
+        foreach (Language::getLanguages(false) as $language) {
+            $tab->name[(int) $language['id_lang']] = $this->trans('Contact widget requests', [], 'Modules.M4pcontactwidget.Admin', $language['locale']);
+        }
+
+        return (bool) $tab->add();
+    }
+
+    private function uninstallTab(): bool
+    {
+        $idTab = (int) Tab::getIdFromClassName(self::ADMIN_CONTROLLER);
+
+        return !$idTab || (new Tab($idTab))->delete();
+    }
+
+    /**
+     * Writes the settings that are not stored yet: contact data from the shop settings, the retention
+     * period and default texts in every language. Used on install and upgrade; saved values stay.
+     */
+    public function applyDefaults(): void
+    {
+        $plain = [
+            self::CFG_PHONE => (string) Configuration::get('PS_SHOP_PHONE'),
+            self::CFG_EMAIL => (string) Configuration::get('PS_SHOP_EMAIL'),
+            self::CFG_MODULE_CSS => 1,
+            self::CFG_RETENTION_DAYS => self::DEFAULT_RETENTION_DAYS,
+        ];
+        foreach ($plain as $key => $value) {
+            if (!Configuration::hasKey($key)) {
+                Configuration::updateValue($key, $value);
+            }
+        }
+
+        $texts = [self::CFG_TITLE => [], self::CFG_INTRO => [], self::CFG_HOURS => [], self::CFG_BUBBLE => []];
+        foreach (Language::getLanguages(false) as $language) {
+            $id = (int) $language['id_lang'];
+            $locale = (string) $language['locale'];
+            $texts[self::CFG_TITLE][$id] = $this->trans('Need help?', [], 'Modules.M4pcontactwidget.Shop', $locale);
+            $texts[self::CFG_INTRO][$id] = $this->trans('Call or write to us, or leave your number and we will call you back.', [], 'Modules.M4pcontactwidget.Shop', $locale);
+            $texts[self::CFG_HOURS][$id] = '';
+            $texts[self::CFG_BUBBLE][$id] = $this->trans('Have a question? We are happy to help.', [], 'Modules.M4pcontactwidget.Shop', $locale);
+        }
+        $idLangDefault = (int) Configuration::get('PS_LANG_DEFAULT');
+        foreach ($texts as $key => $values) {
+            if (!Configuration::hasKey($key, $idLangDefault)) {
+                Configuration::updateValue($key, $values);
+            }
+        }
     }
 
     public function installDb(): bool
     {
-        // ip_date carries the per-address rate check and shop_date both the
-        // back-office list and the retention purge, which run on every
-        // submission and would otherwise scan the whole table.
+        // ip_date carries the per-address rate check and shop_date both the back-office list and the
+        // retention purge, which run on every submission and would otherwise scan the whole table.
         $sql = 'CREATE TABLE IF NOT EXISTS `' . _DB_PREFIX_ . self::TABLE . '` (
             `id_m4p_contact_request` INT UNSIGNED NOT NULL AUTO_INCREMENT,
             `channel` ENUM(\'phone\',\'email\') NOT NULL,
@@ -119,8 +206,8 @@ class M4p_ContactWidget extends Module
     }
 
     /**
-     * The secret behind the form token. Written while the page is still being
-     * built, because Cookie::write() does nothing once output has started.
+     * The secret behind the form token, kept in the visitor's cookie. Issued by the submit controller
+     * when the panel asks for a token, so the page markup stays the same for every visitor.
      */
     public static function issueNonce(Cookie $cookie): void
     {
@@ -133,8 +220,8 @@ class M4p_ContactWidget extends Module
     }
 
     /**
-     * Token the form carries: tied to the visitor's own cookie, so it is
-     * neither guessable nor reusable from another browser.
+     * Token the form carries: tied to the visitor's own cookie, so it is neither guessable nor reusable
+     * from another browser.
      */
     public static function formToken(Cookie $cookie): string
     {
@@ -143,65 +230,84 @@ class M4p_ContactWidget extends Module
         return $nonce === '' ? '' : Tools::hash($nonce . 'm4p_contactwidget');
     }
 
-    /**
-     * @param array<string, mixed> $params
-     */
-    public function hookActionFrontControllerSetMedia(array $params): void
+    private function isShownHere(): bool
     {
-        self::issueNonce($this->context->cookie);
-        $this->purgeOldRows();
+        return !in_array((string) ($this->context->controller->php_self ?? ''), self::HIDDEN_ON, true);
+    }
 
-        $this->context->controller->registerStylesheet(
-            'm4p-contactwidget',
-            'modules/' . $this->name . '/views/css/widget.css',
-            ['media' => 'all', 'priority' => 1000]
-        );
+    public function hookActionFrontControllerSetMedia(): void
+    {
+        if (!$this->isShownHere()) {
+            return;
+        }
+
+        if (Configuration::get(self::CFG_MODULE_CSS)) {
+            $this->context->controller->registerStylesheet(
+                'm4p-contactwidget',
+                'modules/' . $this->name . '/views/css/widget.css',
+                ['media' => 'all', 'priority' => 1000]
+            );
+        }
         $this->context->controller->registerJavascript(
             'm4p-contactwidget',
             'modules/' . $this->name . '/views/js/widget.js',
             ['position' => 'bottom', 'priority' => 200]
         );
-
-        Media::addJsDef([
-            'm4pContactWidgetUrl' => $this->context->link->getModuleLink($this->name, 'submit', [], true),
-            'm4pContactWidgetPlaceholders' => [
-                'phone' => $this->trans('e.g. +48 123 456 789', [], 'Modules.M4pcontactwidget.Shop'),
-                'email' => $this->trans('e.g. jan.kowalski@company.com', [], 'Modules.M4pcontactwidget.Shop'),
-            ],
-            'm4pContactWidgetMessages' => [
-                'consent' => $this->trans('Consent to processing your data is required.', [], 'Modules.M4pcontactwidget.Shop'),
-                'email' => $this->trans('Enter a valid e-mail address.', [], 'Modules.M4pcontactwidget.Shop'),
-                'phone' => $this->trans('Enter a valid phone number.', [], 'Modules.M4pcontactwidget.Shop'),
-                'success' => $this->trans('Thank you, we will get back to you as soon as we can.', [], 'Modules.M4pcontactwidget.Shop'),
-                'failure' => $this->trans('The request could not be sent. Please try again.', [], 'Modules.M4pcontactwidget.Shop'),
-                'network' => $this->trans('Connection problem. Please try again.', [], 'Modules.M4pcontactwidget.Shop'),
-            ],
-        ]);
     }
 
     /**
-     * @param array<string, mixed> $params
+     * The markup is the same for every visitor (the form token is fetched when the panel opens), so
+     * full-page caches can keep it.
      */
-    public function hookDisplayFooter(array $params): string
+    public function hookDisplayBeforeBodyClosingTag(): string
     {
-        $privacyUrl = '';
-        $idCms = (int) Configuration::get(self::CFG_PRIVACY_CMS_ID);
-        if ($idCms > 0) {
-            $privacyUrl = $this->context->link->getCMSLink($idCms);
+        if (!$this->isShownHere()) {
+            return '';
         }
 
-        $this->context->smarty->assign([
-            'm4pPrivacyUrl' => $privacyUrl,
-            'm4pContactToken' => self::formToken($this->context->cookie),
+        $idLang = (int) $this->context->language->id;
+        $idCms = (int) Configuration::get(self::CFG_PRIVACY_CMS_ID);
+        $phone = trim((string) Configuration::get(self::CFG_PHONE));
+        $email = trim((string) Configuration::get(self::CFG_EMAIL));
+
+        $this->context->smarty->assign('m4p_contact', [
+            'title' => (string) Configuration::get(self::CFG_TITLE, $idLang),
+            'intro' => (string) Configuration::get(self::CFG_INTRO, $idLang),
+            'hours' => (string) Configuration::get(self::CFG_HOURS, $idLang),
+            'bubble' => (string) Configuration::get(self::CFG_BUBBLE, $idLang),
+            'phone' => $phone,
+            'phone_href' => preg_replace('/[^0-9+]/', '', $phone),
+            'email' => Validate::isEmail($email) ? $email : '',
+            'privacy_url' => $idCms > 0 ? $this->context->link->getCMSLink($idCms) : '',
+            'submit_url' => $this->context->link->getModuleLink($this->name, 'submit', [], true),
+            'icons' => $this->getIcons(),
         ]);
 
-        return $this->display(__FILE__, 'widget.tpl');
+        return $this->display(__FILE__, 'views/templates/hook/widget.tpl');
     }
 
     /**
-     * Rows older than the retention setting of the shop they belong to.
-     * Called from the front office and from the configuration page, at most
-     * once a day per shop.
+     * Font Awesome Free icons shipped in views/img, inlined as decorative SVG.
+     *
+     * @return array<string, string>
+     */
+    private function getIcons(): array
+    {
+        $icons = [];
+        foreach (self::ICONS as $name) {
+            $icons[$name] = str_replace(
+                '<svg ',
+                '<svg class="m4p-contact-widget__svg" aria-hidden="true" focusable="false" fill="currentColor" ',
+                (string) Tools::file_get_contents(__DIR__ . '/views/img/' . $name . '.svg')
+            );
+        }
+
+        return $icons;
+    }
+
+    /**
+     * Deletes rows older than the retention setting of the current shop, at most once a day per shop.
+     * Called on every submission and when the back-office list opens.
      */
     public function purgeOldRows(): void
     {
@@ -215,9 +321,8 @@ class M4p_ContactWidget extends Module
             return;
         }
 
-        // The cut-off is computed in PHP, the same clock the rows were written
-        // with, so the retention period does not shift with the time zone the
-        // database session runs in.
+        // The cut-off is computed in PHP, the clock the rows were written with, so the retention period
+        // does not shift with the time zone the database session runs in.
         Db::getInstance()->execute(
             'DELETE FROM `' . _DB_PREFIX_ . self::TABLE . '`
              WHERE `id_shop` = ' . (int) $this->context->shop->id . '
@@ -228,8 +333,8 @@ class M4p_ContactWidget extends Module
     }
 
     /**
-     * Submissions the psgdpr module exports for a customer, matched on the
-     * e-mail address they left in the widget.
+     * Submissions the psgdpr module exports for a customer, matched on the e-mail address they left
+     * in the widget.
      *
      * @param array<string, mixed> $params
      *
@@ -273,8 +378,7 @@ class M4p_ContactWidget extends Module
     }
 
     /**
-     * Submissions belong to the shop they were left in, so a shop that is
-     * removed takes them with it.
+     * Submissions belong to the shop they were left in, so a shop that is removed takes them with it.
      *
      * @param array<string, mixed> $params
      */
@@ -292,111 +396,117 @@ class M4p_ContactWidget extends Module
 
     public function getContent(): string
     {
-        $output = $this->handleActions();
-        $this->purgeOldRows();
+        $output = '';
 
-        return $output . $this->renderConfigForm() . $this->renderRequestsList();
+        if (Tools::isSubmit('submitM4pContactWidget')) {
+            $output .= $this->saveSettings();
+        }
+
+        $requestsUrl = $this->context->link->getAdminLink(self::ADMIN_CONTROLLER);
+        // trans() escapes its parameters, so the link goes in after translating.
+        $output .= '<div class="alert alert-info">' . str_replace(
+            '%link%',
+            '<a href="' . htmlspecialchars($requestsUrl, ENT_QUOTES) . '">' . $this->trans('Contact widget requests', [], 'Modules.M4pcontactwidget.Admin') . '</a>',
+            $this->trans('Requests sent from the widget are listed in Customers > %link%.', [], 'Modules.M4pcontactwidget.Admin')
+        ) . '</div>';
+
+        return $output . $this->renderConfigForm();
     }
 
-    private function handleActions(): string
+    private function saveSettings(): string
     {
-        $idDelete = (int) Tools::getValue('m4p_delete_request');
-        if ($idDelete > 0) {
-            if (!hash_equals(Tools::getAdminTokenLite('AdminModules'), (string) Tools::getValue('token'))) {
-                return $this->displayError($this->trans('Invalid security token.', [], 'Modules.M4pcontactwidget.Admin'));
-            }
-
-            Db::getInstance()->execute(
-                'DELETE FROM `' . _DB_PREFIX_ . self::TABLE . '`
-                 WHERE `id_m4p_contact_request` = ' . $idDelete . '
-                   AND `id_shop` IN (' . $this->contextShopIds() . ')'
-            );
-
-            return $this->displayConfirmation($this->trans('Submission deleted.', [], 'Modules.M4pcontactwidget.Admin'));
-        }
-
-        if (!Tools::isSubmit('submitM4pContactWidget')) {
-            return '';
-        }
-
-        $idCms = (int) Tools::getValue(self::CFG_PRIVACY_CMS_ID);
         $notifyEmail = trim((string) Tools::getValue(self::CFG_NOTIFY_EMAIL));
+        $email = trim((string) Tools::getValue(self::CFG_EMAIL));
         $retention = (int) Tools::getValue(self::CFG_RETENTION_DAYS);
 
-        if ($notifyEmail !== '' && !Validate::isEmail($notifyEmail)) {
-            return $this->displayError($this->trans('Enter a valid e-mail address for notifications.', [], 'Modules.M4pcontactwidget.Admin'));
+        if (($notifyEmail !== '' && !Validate::isEmail($notifyEmail)) || ($email !== '' && !Validate::isEmail($email))) {
+            return $this->displayError($this->trans('That e-mail address is not valid, so nothing was saved.', [], 'Modules.M4pcontactwidget.Admin'));
         }
 
         if ($retention < 0) {
             return $this->displayError($this->trans('Enter the number of days as 0 or more.', [], 'Modules.M4pcontactwidget.Admin'));
         }
 
-        Configuration::updateValue(self::CFG_PRIVACY_CMS_ID, $idCms);
+        Configuration::updateValue(self::CFG_PRIVACY_CMS_ID, (int) Tools::getValue(self::CFG_PRIVACY_CMS_ID));
         Configuration::updateValue(self::CFG_NOTIFY_EMAIL, $notifyEmail);
         Configuration::updateValue(self::CFG_RETENTION_DAYS, $retention);
+        Configuration::updateValue(self::CFG_PHONE, trim((string) Tools::getValue(self::CFG_PHONE)));
+        Configuration::updateValue(self::CFG_EMAIL, $email);
+        Configuration::updateValue(self::CFG_MODULE_CSS, (int) (bool) Tools::getValue(self::CFG_MODULE_CSS));
+        foreach (self::LANG_KEYS as $key) {
+            $values = [];
+            foreach (Language::getLanguages(false) as $language) {
+                $values[(int) $language['id_lang']] = trim((string) Tools::getValue($key . '_' . (int) $language['id_lang']));
+            }
+            Configuration::updateValue($key, $values);
+        }
 
-        return $this->displayConfirmation($this->trans('Settings saved.', [], 'Modules.M4pcontactwidget.Admin'));
-    }
-
-    /**
-     * Shops the employee is looking at, as a list for an IN clause.
-     */
-    private function contextShopIds(): string
-    {
-        $ids = array_map('intval', Shop::getContextListShopID());
-
-        return implode(',', $ids ?: [(int) $this->context->shop->id]);
+        return $this->displayConfirmation($this->trans('Settings updated.', [], 'Modules.M4pcontactwidget.Admin'));
     }
 
     private function renderConfigForm(): string
     {
-        $cmsOptions = [['id' => 0, 'name' => $this->trans('– none, hide the link –', [], 'Modules.M4pcontactwidget.Admin')]];
+        $t = function (string $text): string {
+            return $this->trans($text, [], 'Modules.M4pcontactwidget.Admin');
+        };
+
+        $cmsOptions = [['id' => 0, 'name' => $t('None (no link)')]];
         $cmsPages = Db::getInstance()->executeS(
             'SELECT c.id_cms, cl.meta_title FROM `' . _DB_PREFIX_ . 'cms` c
              JOIN `' . _DB_PREFIX_ . 'cms_lang` cl ON cl.id_cms = c.id_cms AND cl.id_lang = ' . (int) $this->context->language->id . '
              ORDER BY cl.meta_title'
-        );
+        ) ?: [];
         foreach ($cmsPages as $page) {
             $cmsOptions[] = ['id' => (int) $page['id_cms'], 'name' => $page['meta_title']];
         }
 
         $inputs = [
+            ['type' => 'text', 'label' => $t('Heading'), 'name' => self::CFG_TITLE, 'lang' => true],
+            ['type' => 'textarea', 'label' => $t('Text under the heading'), 'name' => self::CFG_INTRO, 'lang' => true],
+            ['type' => 'text', 'label' => $t('Phone'), 'name' => self::CFG_PHONE, 'desc' => $t('Shown as written; the link dials the digits. Empty hides the row.')],
+            ['type' => 'text', 'label' => $t('E-mail'), 'name' => self::CFG_EMAIL, 'desc' => $t('Empty hides the row.')],
+            ['type' => 'text', 'label' => $t('Opening hours'), 'name' => self::CFG_HOURS, 'lang' => true, 'desc' => $t('Empty hides the row.')],
+            ['type' => 'text', 'label' => $t('Speech bubble'), 'name' => self::CFG_BUBBLE, 'lang' => true, 'desc' => $t('Shown next to the button once per visitor. Empty turns it off.')],
             [
                 'type' => 'select',
-                'label' => $this->trans('Privacy policy page', [], 'Modules.M4pcontactwidget.Admin'),
+                'label' => $t('Privacy policy page'),
                 'name' => self::CFG_PRIVACY_CMS_ID,
-                'desc' => $this->trans('The consent text in the widget links to the page you pick here.', [], 'Modules.M4pcontactwidget.Admin'),
-                'options' => [
-                    'query' => $cmsOptions,
-                    'id' => 'id',
-                    'name' => 'name',
-                ],
+                'desc' => $t('Linked from the consent under the form.'),
+                'options' => ['query' => $cmsOptions, 'id' => 'id', 'name' => 'name'],
             ],
             [
                 'type' => 'text',
-                'label' => $this->trans('Notify this address', [], 'Modules.M4pcontactwidget.Admin'),
+                'label' => $t('Notification e-mail'),
                 'name' => self::CFG_NOTIFY_EMAIL,
-                'desc' => $this->trans('Every submission is e-mailed here. Leave it empty to send nothing – submissions still appear in the list below.', [], 'Modules.M4pcontactwidget.Admin'),
+                'desc' => $t('Every request from the form is sent here. Empty means no e-mail; requests are still listed in the back office.'),
             ],
             [
                 'type' => 'text',
-                'label' => $this->trans('Keep submissions for', [], 'Modules.M4pcontactwidget.Admin'),
+                'label' => $t('Keep submissions for'),
                 'name' => self::CFG_RETENTION_DAYS,
-                'suffix' => $this->trans('days', [], 'Modules.M4pcontactwidget.Admin'),
+                'suffix' => $t('days'),
                 'class' => 'fixed-width-sm',
-                'desc' => $this->trans('Older submissions are deleted once a day. Enter 0 to keep them until you delete them yourself.', [], 'Modules.M4pcontactwidget.Admin'),
+                'desc' => $t('Older submissions are deleted once a day. Enter 0 to keep them until you delete them yourself.'),
+            ],
+            [
+                'type' => 'switch',
+                'label' => $t('Load the module stylesheet'),
+                'name' => self::CFG_MODULE_CSS,
+                'is_bool' => true,
+                'values' => [
+                    ['id' => 'css_on', 'value' => 1, 'label' => $t('Yes')],
+                    ['id' => 'css_off', 'value' => 0, 'label' => $t('No')],
+                ],
+                'desc' => $t('Turn it off when the theme styles the widget itself.'),
             ],
         ];
 
-        if (Shop::isFeatureActive()) {
-            $inputs[0]['desc'] .= ' ' . $this->trans('The three settings belong to the shop selected above.', [], 'Modules.M4pcontactwidget.Admin');
-        }
-
         $fields_form = [
             'form' => [
-                'legend' => ['title' => $this->trans('Settings', [], 'Modules.M4pcontactwidget.Admin'), 'icon' => 'icon-cogs'],
+                'legend' => ['title' => $t('Contact widget'), 'icon' => 'icon-cogs'],
+                'description' => Shop::isFeatureActive() ? $t('The settings belong to the shop selected above.') : '',
                 'input' => $inputs,
-                'submit' => ['title' => $this->trans('Save', [], 'Modules.M4pcontactwidget.Admin'), 'name' => 'submitM4pContactWidget'],
+                'submit' => ['title' => $t('Save'), 'name' => 'submitM4pContactWidget'],
             ],
         ];
 
@@ -406,46 +516,22 @@ class M4p_ContactWidget extends Module
         $helper->token = Tools::getAdminTokenLite('AdminModules');
         $helper->currentIndex = AdminController::$currentIndex . '&configure=' . $this->name;
         $helper->submit_action = 'submitM4pContactWidget';
+        $helper->default_form_language = (int) $this->context->language->id;
+        $helper->languages = $this->context->controller->getLanguages();
         $helper->fields_value = [
             self::CFG_PRIVACY_CMS_ID => (int) Configuration::get(self::CFG_PRIVACY_CMS_ID),
-            self::CFG_NOTIFY_EMAIL => Configuration::get(self::CFG_NOTIFY_EMAIL),
+            self::CFG_NOTIFY_EMAIL => (string) Configuration::get(self::CFG_NOTIFY_EMAIL),
             self::CFG_RETENTION_DAYS => (int) Configuration::get(self::CFG_RETENTION_DAYS),
+            self::CFG_PHONE => (string) Configuration::get(self::CFG_PHONE),
+            self::CFG_EMAIL => (string) Configuration::get(self::CFG_EMAIL),
+            self::CFG_MODULE_CSS => (int) Configuration::get(self::CFG_MODULE_CSS),
         ];
-
-        return $helper->generateForm([$fields_form]);
-    }
-
-    private function renderRequestsList(): string
-    {
-        $rows = Db::getInstance()->executeS(
-            'SELECT * FROM `' . _DB_PREFIX_ . self::TABLE . '`
-             WHERE `id_shop` IN (' . $this->contextShopIds() . ')
-             ORDER BY `date_add` DESC
-             LIMIT 100'
-        ) ?: [];
-
-        $multishop = Shop::isFeatureActive();
-        $shopNames = [];
-        if ($multishop) {
-            foreach (Shop::getShops(false) as $shop) {
-                $shopNames[(int) $shop['id_shop']] = $shop['name'];
+        foreach (self::LANG_KEYS as $key) {
+            foreach (Language::getLanguages(false) as $language) {
+                $helper->fields_value[$key][(int) $language['id_lang']] = (string) Configuration::get($key, (int) $language['id_lang']);
             }
         }
 
-        $baseUrl = AdminController::$currentIndex . '&configure=' . $this->name
-            . '&token=' . Tools::getAdminTokenLite('AdminModules');
-
-        foreach ($rows as &$row) {
-            $row['shop_name'] = $shopNames[(int) $row['id_shop']] ?? '';
-            $row['url_delete'] = $baseUrl . '&m4p_delete_request=' . (int) $row['id_m4p_contact_request'];
-        }
-        unset($row);
-
-        $this->context->smarty->assign([
-            'm4pRequests' => $rows,
-            'm4pMultistore' => $multishop,
-        ]);
-
-        return $this->display(__FILE__, 'requests-list.tpl');
+        return $helper->generateForm([$fields_form]);
     }
 }

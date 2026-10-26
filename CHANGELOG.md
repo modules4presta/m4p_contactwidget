@@ -4,6 +4,39 @@ All notable changes to this module are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the module uses
 [semantic versioning](https://semver.org/).
 
+## [3.0.0] - 2026-10-21
+
+### Added
+
+- Phone, e-mail and opening hours in the panel, edited in the configuration together with the heading,
+  the text under it and the speech bubble (per language). Phone and e-mail start from the shop's
+  contact details; an empty field hides its row.
+- Customers > Contact widget requests (`AdminM4pContactRequests`): submissions with filters, sorting,
+  CSV export, `tel:`/`mailto:` links and deleting per row or in bulk, limited to the shops the
+  multistore selector covers, with a shop column in multistore.
+- A switch that skips the module stylesheet when the theme styles the widget.
+- Font Awesome Free icons as inline SVG (`views/img`).
+- The submission event is passed to `window.m4pTrack` when an analytics module provides it.
+
+### Changed
+
+- The widget renders in `displayBeforeBodyClosingTag` and is left out of the cart, the checkout and
+  the order confirmation; its CSS and JavaScript load on the same pages only.
+- New markup: the panel is a labelled dialog whose heading takes focus on open, Esc and a click
+  outside close it, the phone / e-mail choice is a radio group that switches the field's type, label
+  and keyboard, and the thank-you message replaces the form. Themes overriding `widget.tpl` or styling
+  the 2.x class names need to follow the new markup.
+- The form token is fetched from the submit endpoint when the form is sent, so the page markup is the
+  same for every visitor and full-page caches can keep it.
+- Messages for the script come from `data-*` attributes on the widget root.
+- The speech bubble waits for the visitor's first scroll and shows once per browser.
+- Old submissions are purged when a submission arrives and when the back-office list opens.
+- The upgrade keeps every stored setting and only writes the ones that are missing.
+
+### Removed
+
+- The submission list on the configuration page, replaced by the Customers tab.
+
 ## [2.1.0] - 2026-10-12
 
 ### Added
