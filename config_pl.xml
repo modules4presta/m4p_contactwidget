@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <module>
     <name>m4p_contactwidget</name>
-    <displayName><![CDATA[Widget z prośbą o kontakt]]></displayName>
-    <version><![CDATA[2.1.0]]></version>
-    <description><![CDATA[Przycisk w rogu sklepu, przez który odwiedzający zostawia numer telefonu albo adres e-mail, żebyś mógł oddzwonić.]]></description>
+    <displayName><![CDATA[Widget kontaktowy]]></displayName>
+    <version><![CDATA[3.0.0]]></version>
+    <description><![CDATA[Pływający przycisk w rogu sklepu z telefonem, e-mailem, godzinami pracy i formularzem „oddzwonimy”.]]></description>
     <author><![CDATA[Modules4Presta]]></author>
     <tab><![CDATA[front_office_features]]></tab>
     <confirmUninstall><![CDATA[Usunąć moduł? Zebrane do tej pory zgłoszenia zostaną skasowane razem z nim.]]></confirmUninstall>

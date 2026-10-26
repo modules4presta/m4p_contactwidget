@@ -1,58 +1,94 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="UTF-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
   <file original="module" source-language="en-US" target-language="pl-PL" datatype="plaintext">
     <body>
-      <trans-unit id="86716dafdb625d0c7d26f6f3675cda77">
-        <source>Callback request widget</source>
-        <target>Widget z prośbą o kontakt</target>
+      <trans-unit id="76a39faff6699bb735507e0393a337b9">
+        <source>Contact widget</source>
+        <target>Widget kontaktowy</target>
       </trans-unit>
-      <trans-unit id="d3df40456c865be53805db585132d25a">
-        <source>A button in the corner of the shop that lets visitors leave a phone number or an e-mail address for you to call back.</source>
-        <target>Przycisk w rogu sklepu, przez który odwiedzający zostawia numer telefonu albo adres e-mail, żebyś mógł oddzwonić.</target>
+      <trans-unit id="25d9bd5f0e8505708140834603677b24">
+        <source>A floating button in the corner of the shop with the phone, e-mail, opening hours and a "we will call you back" form.</source>
+        <target>Pływający przycisk w rogu sklepu z telefonem, e-mailem, godzinami pracy i formularzem „oddzwonimy”.</target>
       </trans-unit>
       <trans-unit id="c1b2aafbae0f543b685bf67796217192">
         <source>Remove the module? The submissions collected so far are deleted with it.</source>
         <target>Usunąć moduł? Zebrane do tej pory zgłoszenia zostaną skasowane razem z nim.</target>
       </trans-unit>
-      <trans-unit id="66dff4bc6149738292b7b2737e7e2e8c">
-        <source>Invalid security token.</source>
-        <target>Nieprawidłowy token bezpieczeństwa.</target>
+      <trans-unit id="386cf189bf7aa285609a5e08d082db41">
+        <source>Contact widget requests</source>
+        <target>Zgłoszenia z widgetu</target>
       </trans-unit>
-      <trans-unit id="003fefd4ee223f1499127c56deebbaa2">
-        <source>Submission deleted.</source>
-        <target>Zgłoszenie usunięte.</target>
+      <trans-unit id="5534ad0d46d41b6ce409ef8c8ffd8386">
+        <source>Requests sent from the widget are listed in Customers &gt; %link%.</source>
+        <target>Zgłoszenia wysłane z widgetu są w menu Klienci &gt; %link%.</target>
       </trans-unit>
-      <trans-unit id="6d847d3415acb49822bf8329ded79919">
-        <source>Enter a valid e-mail address for notifications.</source>
-        <target>Podaj prawidłowy adres e-mail do powiadomień.</target>
+      <trans-unit id="d11f83faa9a91703b28a71c4539f82eb">
+        <source>That e-mail address is not valid, so nothing was saved.</source>
+        <target>Podany adres e-mail jest nieprawidłowy – nic nie zapisano.</target>
       </trans-unit>
       <trans-unit id="f8c91b90df1830866d492cfa7de4c2c8">
         <source>Enter the number of days as 0 or more.</source>
         <target>Podaj liczbę dni jako 0 lub więcej.</target>
       </trans-unit>
-      <trans-unit id="9a7e58ee13cb727cb7c4acc68f4cafe5">
-        <source>Settings saved.</source>
+      <trans-unit id="f38f5974cdc23279ffe6d203641a8bdf">
+        <source>Settings updated.</source>
         <target>Ustawienia zapisane.</target>
       </trans-unit>
-      <trans-unit id="ddcabab231b371f01cc2e752cdef536e">
-        <source>– none, hide the link –</source>
-        <target>– brak, ukryj link –</target>
+      <trans-unit id="b8a83f25767634ffc64f097e28254006">
+        <source>None (no link)</source>
+        <target>Brak (bez linku)</target>
+      </trans-unit>
+      <trans-unit id="0101316665d4f82adaa26d86fbbb2d6e">
+        <source>Heading</source>
+        <target>Nagłówek</target>
+      </trans-unit>
+      <trans-unit id="5a61f53788811394814b4c881cbdddd2">
+        <source>Text under the heading</source>
+        <target>Tekst pod nagłówkiem</target>
+      </trans-unit>
+      <trans-unit id="bcc254b55c4a1babdf1dcb82c207506b">
+        <source>Phone</source>
+        <target>Telefon</target>
+      </trans-unit>
+      <trans-unit id="35e16b22fc97383c8982d804995f0652">
+        <source>Shown as written; the link dials the digits. Empty hides the row.</source>
+        <target>Wyświetlany tak, jak wpisany; link wybiera same cyfry. Puste pole ukrywa wiersz.</target>
+      </trans-unit>
+      <trans-unit id="1e884e3078d9978e216a027ecd57fb34">
+        <source>E-mail</source>
+        <target>E-mail</target>
+      </trans-unit>
+      <trans-unit id="903b75abe4d554c682317c1834472199">
+        <source>Empty hides the row.</source>
+        <target>Puste pole ukrywa wiersz.</target>
+      </trans-unit>
+      <trans-unit id="80a0c205cd57b22fca7f174253870300">
+        <source>Opening hours</source>
+        <target>Godziny pracy</target>
+      </trans-unit>
+      <trans-unit id="7d20f64b783f57787daf965663038c1f">
+        <source>Speech bubble</source>
+        <target>Dymek</target>
+      </trans-unit>
+      <trans-unit id="920d6e00e58982ea183ec53282575059">
+        <source>Shown next to the button once per visitor. Empty turns it off.</source>
+        <target>Pokazywany przy przycisku raz na odwiedzającego. Puste pole go wyłącza.</target>
       </trans-unit>
       <trans-unit id="3b75aac75dc5f26614dab746da7b081d">
         <source>Privacy policy page</source>
-        <target>Strona z polityką prywatności</target>
+        <target>Strona polityki prywatności</target>
       </trans-unit>
-      <trans-unit id="9bf90b7e44dd9f28fd73ac4d4fec5a35">
-        <source>The consent text in the widget links to the page you pick here.</source>
-        <target>Treść zgody w widgecie linkuje do strony wybranej tutaj.</target>
+      <trans-unit id="e6b13a43d761a3d3ec1977496fbcb461">
+        <source>Linked from the consent under the form.</source>
+        <target>Link w zgodzie pod formularzem.</target>
       </trans-unit>
-      <trans-unit id="cca46a196f5059d50738b155d9a2e171">
-        <source>Notify this address</source>
-        <target>Powiadamiaj ten adres</target>
+      <trans-unit id="e480686f42911546de1f314c272014e8">
+        <source>Notification e-mail</source>
+        <target>E-mail do powiadomień</target>
       </trans-unit>
-      <trans-unit id="d5e1198b422c97ee761d68f08ebcdd66">
-        <source>Every submission is e-mailed here. Leave it empty to send nothing – submissions still appear in the list below.</source>
-        <target>Każde zgłoszenie idzie mailem na ten adres. Puste pole oznacza brak wysyłki – zgłoszenia nadal pojawiają się na liście poniżej.</target>
+      <trans-unit id="e0d4265bffb0bbda13fafaba1c9a2490">
+        <source>Every request from the form is sent here. Empty means no e-mail; requests are still listed in the back office.</source>
+        <target>Każde zgłoszenie z formularza trafia na ten adres. Puste pole wyłącza wysyłkę; zgłoszenia nadal są widoczne w panelu.</target>
       </trans-unit>
       <trans-unit id="af1da245ffc0fb1522398a4d9e6e9882">
         <source>Keep submissions for</source>
@@ -66,25 +102,37 @@
         <source>Older submissions are deleted once a day. Enter 0 to keep them until you delete them yourself.</source>
         <target>Starsze zgłoszenia są usuwane raz na dobę. Wpisz 0, aby trzymać je do ręcznego usunięcia.</target>
       </trans-unit>
-      <trans-unit id="b116617f81ca773f28a35c4b94e0a134">
-        <source>The three settings belong to the shop selected above.</source>
-        <target>Te trzy ustawienia należą do sklepu wybranego powyżej.</target>
+      <trans-unit id="c47746fa7da6748f28b6c3da52885908">
+        <source>Load the module stylesheet</source>
+        <target>Wczytuj style modułu</target>
       </trans-unit>
-      <trans-unit id="f4f70727dc34561dfde1a3c529b6205c">
-        <source>Settings</source>
-        <target>Ustawienia</target>
+      <trans-unit id="93cba07454f06a4a960172bbd6e2a435">
+        <source>Yes</source>
+        <target>Tak</target>
+      </trans-unit>
+      <trans-unit id="bafd7322c6e97d25b6299b5d6fe8920b">
+        <source>No</source>
+        <target>Nie</target>
+      </trans-unit>
+      <trans-unit id="b144f9cbdce75ec35cf8f6ccda4a8b0c">
+        <source>Turn it off when the theme styles the widget itself.</source>
+        <target>Wyłącz, gdy wygląd widgetu zapewnia motyw.</target>
+      </trans-unit>
+      <trans-unit id="3a1959ba2e23853a15df8371e0a40c48">
+        <source>The settings belong to the shop selected above.</source>
+        <target>Ustawienia dotyczą sklepu wybranego powyżej.</target>
       </trans-unit>
       <trans-unit id="c9cc8cce247e49bae79f15173ce97354">
         <source>Save</source>
         <target>Zapisz</target>
       </trans-unit>
-      <trans-unit id="42391ec0e30a7e162e07772d69f3b688">
-        <source>Latest requests</source>
-        <target>Ostatnie zgłoszenia</target>
+      <trans-unit id="051c0d593530ca8b1fe07fe3790c69c5">
+        <source>New request from the contact widget</source>
+        <target>Nowe zgłoszenie z widgetu kontaktowego</target>
       </trans-unit>
-      <trans-unit id="8bc5e1018c9e9645e98226be71778b41">
-        <source>No requests yet.</source>
-        <target>Brak zgłoszeń.</target>
+      <trans-unit id="b718adec73e04ce3ec720dd11a06a308">
+        <source>ID</source>
+        <target>ID</target>
       </trans-unit>
       <trans-unit id="44749712dbec183e983dcd78a7736c41">
         <source>Date</source>
@@ -98,49 +146,25 @@
         <source>Contact</source>
         <target>Kontakt</target>
       </trans-unit>
-      <trans-unit id="1bbdf136f897ea2075a786bd05152095">
-        <source>Consent</source>
-        <target>Zgoda</target>
-      </trans-unit>
       <trans-unit id="193cfc9be3b995831c6af2fea6650e60">
         <source>Page</source>
         <target>Strona</target>
       </trans-unit>
-      <trans-unit id="75ba8d70e3692ba200f0e0df37b4d2ae">
-        <source>IP address</source>
-        <target>Adres IP</target>
+      <trans-unit id="a12a3079e14ced46e69ba52b8a90b21a">
+        <source>IP</source>
+        <target>IP</target>
       </trans-unit>
       <trans-unit id="9f82518d468b9fee614fcc92f76bb163">
         <source>Shop</source>
         <target>Sklep</target>
       </trans-unit>
-      <trans-unit id="06df33001c1d7187fdd81ea1f5b277aa">
-        <source>Actions</source>
-        <target>Akcje</target>
+      <trans-unit id="d3b206d196cd6be3a2764c1fb90b200f">
+        <source>Delete selected</source>
+        <target>Usuń zaznaczone</target>
       </trans-unit>
-      <trans-unit id="bcc254b55c4a1babdf1dcb82c207506b">
-        <source>Phone</source>
-        <target>Telefon</target>
-      </trans-unit>
-      <trans-unit id="1e884e3078d9978e216a027ecd57fb34">
-        <source>E-mail</source>
-        <target>E-mail</target>
-      </trans-unit>
-      <trans-unit id="93cba07454f06a4a960172bbd6e2a435">
-        <source>Yes</source>
-        <target>Tak</target>
-      </trans-unit>
-      <trans-unit id="bafd7322c6e97d25b6299b5d6fe8920b">
-        <source>No</source>
-        <target>Nie</target>
-      </trans-unit>
-      <trans-unit id="393fb0bd72576fb3cc1da7df9a150917">
-        <source>Delete this submission?</source>
-        <target>Usunąć to zgłoszenie?</target>
-      </trans-unit>
-      <trans-unit id="f2a6c498fb90ee345d997f888fce3b18">
-        <source>Delete</source>
-        <target>Usuń</target>
+      <trans-unit id="4af3a3ff896e236e43d0cc7bf4bd2d7f">
+        <source>Delete the selected requests?</source>
+        <target>Usunąć zaznaczone zgłoszenia?</target>
       </trans-unit>
     </body>
   </file>
