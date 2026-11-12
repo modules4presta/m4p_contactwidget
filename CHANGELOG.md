@@ -4,6 +4,16 @@ All notable changes to this module are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the module uses
 [semantic versioning](https://semver.org/).
 
+## [3.1.0] - 2026-11-12
+
+### Added
+
+- `data-cta-placement` and `data-cta-kind` on the widget root, `data-cta-channel` on the phone and
+  e-mail links and `data-cta-dismiss` on the close buttons of the panel and the speech bubble.
+- `data-cta-trigger` on the widget root, set when the widget gives a reason to be noticed: `scroll`
+  when the speech bubble appears, `click` when the visitor opens the panel first, `static` when no
+  bubble is shown.
+
 ## [3.0.0] - 2026-10-21
 
 ### Added

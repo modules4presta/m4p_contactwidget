@@ -70,6 +70,9 @@
         }
 
         function open() {
+            if (!root.getAttribute('data-cta-trigger')) {
+                root.setAttribute('data-cta-trigger', 'click');
+            }
             hideBubble();
             panel.hidden = false;
             root.classList.add('is-open');
@@ -203,15 +206,19 @@
         });
 
         // The bubble waits for the visitor's first scroll or touch, so it never shows during a Lighthouse run.
+        // data-cta-trigger tells an analytics script why the widget is on screen.
         if (bubble && !remembered(BUBBLE_KEY)) {
             window.addEventListener('scroll', function () {
                 window.setTimeout(function () {
                     if (panel.hidden && !remembered(BUBBLE_KEY)) {
                         bubble.hidden = false;
+                        root.setAttribute('data-cta-trigger', 'scroll');
                         remember(BUBBLE_KEY);
                     }
                 }, BUBBLE_DELAY);
             }, { once: true, passive: true });
+        } else {
+            root.setAttribute('data-cta-trigger', 'static');
         }
     }
 

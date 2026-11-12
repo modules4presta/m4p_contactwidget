@@ -69,7 +69,7 @@ class M4p_ContactWidget extends Module
     {
         $this->name = 'm4p_contactwidget';
         $this->tab = 'front_office_features';
-        $this->version = '3.0.0';
+        $this->version = '3.1.0';
         $this->author = 'Modules4Presta';
         $this->need_instance = 0;
         $this->bootstrap = true;
