@@ -6,12 +6,12 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  *}
 {strip}
-<div class="m4p-contact-widget" id="m4p-contact-widget" data-url="{$m4p_contact.submit_url|escape:'html':'UTF-8'}" data-error-phone="{l s='Enter a valid phone number.' d='Modules.M4pcontactwidget.Shop'}" data-error-email="{l s='Enter a valid e-mail address.' d='Modules.M4pcontactwidget.Shop'}" data-error-consent="{l s='Tick the consent to the processing of your data.' d='Modules.M4pcontactwidget.Shop'}" data-error-request="{l s='Connection error. Please try again.' d='Modules.M4pcontactwidget.Shop'}">
+<div class="m4p-contact-widget" id="m4p-contact-widget" data-cta-placement="widget" data-cta-kind="widget" data-url="{$m4p_contact.submit_url|escape:'html':'UTF-8'}" data-error-phone="{l s='Enter a valid phone number.' d='Modules.M4pcontactwidget.Shop'}" data-error-email="{l s='Enter a valid e-mail address.' d='Modules.M4pcontactwidget.Shop'}" data-error-consent="{l s='Tick the consent to the processing of your data.' d='Modules.M4pcontactwidget.Shop'}" data-error-request="{l s='Connection error. Please try again.' d='Modules.M4pcontactwidget.Shop'}">
 
   {if $m4p_contact.bubble}
     <div class="m4p-contact-widget__bubble" data-m4p-contact-bubble hidden>
       <p class="m4p-contact-widget__bubble-text">{$m4p_contact.bubble|escape:'html':'UTF-8'}</p>
-      <button type="button" class="m4p-contact-widget__bubble-close" data-m4p-contact-bubble-close title="{l s='Close' d='Modules.M4pcontactwidget.Shop'}" aria-label="{l s='Close' d='Modules.M4pcontactwidget.Shop'}">{$m4p_contact.icons.xmark nofilter}</button>
+      <button type="button" class="m4p-contact-widget__bubble-close" data-m4p-contact-bubble-close data-cta-dismiss title="{l s='Close' d='Modules.M4pcontactwidget.Shop'}" aria-label="{l s='Close' d='Modules.M4pcontactwidget.Shop'}">{$m4p_contact.icons.xmark nofilter}</button>
     </div>
   {/if}
 
@@ -23,7 +23,7 @@
   <section class="m4p-contact-widget__panel" id="m4p-contact-panel" role="dialog" aria-modal="false" aria-labelledby="m4p-contact-title" hidden>
     <div class="m4p-contact-widget__head">
       <div class="h2 m4p-contact-widget__title" id="m4p-contact-title">{$m4p_contact.title|escape:'html':'UTF-8'}</div>
-      <button type="button" class="m4p-contact-widget__close" data-m4p-contact-close title="{l s='Close' d='Modules.M4pcontactwidget.Shop'}" aria-label="{l s='Close' d='Modules.M4pcontactwidget.Shop'}">{$m4p_contact.icons.xmark nofilter}</button>
+      <button type="button" class="m4p-contact-widget__close" data-m4p-contact-close data-cta-dismiss title="{l s='Close' d='Modules.M4pcontactwidget.Shop'}" aria-label="{l s='Close' d='Modules.M4pcontactwidget.Shop'}">{$m4p_contact.icons.xmark nofilter}</button>
     </div>
 
     {if $m4p_contact.intro}
@@ -34,7 +34,7 @@
       <ul class="m4p-contact-widget__channels">
         {if $m4p_contact.phone}
           <li>
-            <a class="m4p-contact-widget__channel" href="tel:{$m4p_contact.phone_href|escape:'html':'UTF-8'}">
+            <a class="m4p-contact-widget__channel" data-cta-channel="phone" href="tel:{$m4p_contact.phone_href|escape:'html':'UTF-8'}">
               <span class="m4p-contact-widget__channel-icon">{$m4p_contact.icons.phone nofilter}</span>
               <span class="m4p-contact-widget__channel-body">
                 <span class="m4p-contact-widget__channel-label">{l s='Phone' d='Modules.M4pcontactwidget.Shop'}</span>
@@ -45,7 +45,7 @@
         {/if}
         {if $m4p_contact.email}
           <li>
-            <a class="m4p-contact-widget__channel" href="mailto:{$m4p_contact.email|escape:'html':'UTF-8'}">
+            <a class="m4p-contact-widget__channel" data-cta-channel="email" href="mailto:{$m4p_contact.email|escape:'html':'UTF-8'}">
               <span class="m4p-contact-widget__channel-icon">{$m4p_contact.icons.envelope nofilter}</span>
               <span class="m4p-contact-widget__channel-body">
                 <span class="m4p-contact-widget__channel-label">{l s='E-mail' d='Modules.M4pcontactwidget.Shop'}</span>

@@ -2,7 +2,7 @@
 <module>
     <name>m4p_contactwidget</name>
     <displayName><![CDATA[Widget kontaktowy]]></displayName>
-    <version><![CDATA[3.0.0]]></version>
+    <version><![CDATA[3.1.0]]></version>
     <description><![CDATA[Pływający przycisk w rogu sklepu z telefonem, e-mailem, godzinami pracy i formularzem „oddzwonimy”.]]></description>
     <author><![CDATA[Modules4Presta]]></author>
     <tab><![CDATA[front_office_features]]></tab>
