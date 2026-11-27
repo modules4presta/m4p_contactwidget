@@ -14,13 +14,141 @@
         <source>Have a question? We are happy to help.</source>
         <target>Have a question? We are happy to help.</target>
       </trans-unit>
-      <trans-unit id="8e9d94503c4f11436603d80d02f40a07">
-        <source>Your session has expired. Refresh the page and try again.</source>
-        <target>Your session has expired. Refresh the page and try again.</target>
+      <trans-unit id="bbaff12800505b22a853e8b7f4eb6a22">
+        <source>Contact</source>
+        <target>Contact</target>
+      </trans-unit>
+      <trans-unit id="3b9eb993ddab67000e3dd4fe08ba5d4d">
+        <source>We call back during the opening hours of the desk.</source>
+        <target>We call back during the opening hours of the desk.</target>
+      </trans-unit>
+      <trans-unit id="09609ec751e4baf176dd72594af6f182">
+        <source>We will call you back as soon as we open.</source>
+        <target>We will call you back as soon as we open.</target>
+      </trans-unit>
+      <trans-unit id="a6fb493e0d6afa32b3ca332ea78d9d1c">
+        <source>We will call you back</source>
+        <target>We will call you back</target>
+      </trans-unit>
+      <trans-unit id="7df61a0962e018c22de96180a1eef6b6">
+        <source>We will write back to you</source>
+        <target>We will write back to you</target>
+      </trans-unit>
+      <trans-unit id="76dff9cf9e73cd3db7c2e7b3b2a524f6">
+        <source>Call me back</source>
+        <target>Call me back</target>
+      </trans-unit>
+      <trans-unit id="94966d90747b97d1f0f206c98a8b1ac3">
+        <source>Send</source>
+        <target>Send</target>
+      </trans-unit>
+      <trans-unit id="25d021d9d39b195ff3dcab932ee59448">
+        <source>I agree to the processing of my personal data in order to be contacted.</source>
+        <target>I agree to the processing of my personal data in order to be contacted.</target>
+      </trans-unit>
+      <trans-unit id="56c34c6410dd45c5cec44149ad0ce037">
+        <source>Privacy policy</source>
+        <target>Privacy policy</target>
       </trans-unit>
       <trans-unit id="3ed61eb8a02faa01c836855c8127be2d">
         <source>Thank you, we will contact you as soon as possible.</source>
         <target>Thank you, we will contact you as soon as possible.</target>
+      </trans-unit>
+      <trans-unit id="03f4a47830f97377a35321051685071e">
+        <source>Closed</source>
+        <target>Closed</target>
+      </trans-unit>
+      <trans-unit id="93128c5a34479b2bd240791f53e85eff">
+        <source>open until %time%</source>
+        <target>open until %time%</target>
+      </trans-unit>
+      <trans-unit id="0c455b611ad668782e2bed22b175ca6e">
+        <source>Open until %time%</source>
+        <target>Open until %time%</target>
+      </trans-unit>
+      <trans-unit id="5b2b6488dcfa99b85fb3452e076b77cf">
+        <source>from %time%</source>
+        <target>from %time%</target>
+      </trans-unit>
+      <trans-unit id="4d2c4264f42c8dc5ac4c240ef9bf04b7">
+        <source>Closed, we open today at %time%</source>
+        <target>Closed, we open today at %time%</target>
+      </trans-unit>
+      <trans-unit id="83f5d5d21cb08ae41d2bfaacc4abe567">
+        <source>tomorrow from %time%</source>
+        <target>tomorrow from %time%</target>
+      </trans-unit>
+      <trans-unit id="d054a1e2e9f8daf0e7af4e2ba051d716">
+        <source>Closed, we open tomorrow at %time%</source>
+        <target>Closed, we open tomorrow at %time%</target>
+      </trans-unit>
+      <trans-unit id="69105c0691d6957f426983b5e3c8d417">
+        <source>%day% from %time%</source>
+        <target>%day% from %time%</target>
+      </trans-unit>
+      <trans-unit id="f0048f9e4ee43038805ae5b307fdbcbd">
+        <source>Closed, we open %day% at %time%</source>
+        <target>Closed, we open %day% at %time%</target>
+      </trans-unit>
+      <trans-unit id="fd29458ae58ac32a2d8734ed90ad51ec">
+        <source>Mon</source>
+        <target>Mon</target>
+      </trans-unit>
+      <trans-unit id="2ddecde85408faf230652444db78cb72">
+        <source>Tue</source>
+        <target>Tue</target>
+      </trans-unit>
+      <trans-unit id="510c292b1686eb070d9e90a575f74106">
+        <source>Wed</source>
+        <target>Wed</target>
+      </trans-unit>
+      <trans-unit id="ed5e8353dfc585f4c6b3a55d1a9fc01d">
+        <source>Thu</source>
+        <target>Thu</target>
+      </trans-unit>
+      <trans-unit id="ac616f844b9a5ea5a827bf7fb99b1ad5">
+        <source>Fri</source>
+        <target>Fri</target>
+      </trans-unit>
+      <trans-unit id="13c7d2d737f81f7bf89aed9fbcd0ad55">
+        <source>Sat</source>
+        <target>Sat</target>
+      </trans-unit>
+      <trans-unit id="ef6572e4cd58bb39a3f4e82fc64fe9f0">
+        <source>Sun</source>
+        <target>Sun</target>
+      </trans-unit>
+      <trans-unit id="6f8522e0610541f1ef215a22ffa66ff6">
+        <source>Monday</source>
+        <target>Monday</target>
+      </trans-unit>
+      <trans-unit id="5792315f09a5d54fb7e3d066672b507f">
+        <source>Tuesday</source>
+        <target>Tuesday</target>
+      </trans-unit>
+      <trans-unit id="796c163589f295373e171842f37265d5">
+        <source>Wednesday</source>
+        <target>Wednesday</target>
+      </trans-unit>
+      <trans-unit id="78ae6f0cd191d25147e252dc54768238">
+        <source>Thursday</source>
+        <target>Thursday</target>
+      </trans-unit>
+      <trans-unit id="c33b138a163847cdb6caeeb7c9a126b4">
+        <source>Friday</source>
+        <target>Friday</target>
+      </trans-unit>
+      <trans-unit id="8b7051187b9191cdcdae6ed5a10e5adc">
+        <source>Saturday</source>
+        <target>Saturday</target>
+      </trans-unit>
+      <trans-unit id="9d1a0949c39e66a0cd65240bc0ac9177">
+        <source>Sunday</source>
+        <target>Sunday</target>
+      </trans-unit>
+      <trans-unit id="8e9d94503c4f11436603d80d02f40a07">
+        <source>Your session has expired. Refresh the page and try again.</source>
+        <target>Your session has expired. Refresh the page and try again.</target>
       </trans-unit>
       <trans-unit id="8f81bb8da0c0c4ceaace58460b965e65">
         <source>Your request has already been sent. Please wait a moment before sending another one.</source>
@@ -54,10 +182,6 @@
         <source>Close</source>
         <target>Close</target>
       </trans-unit>
-      <trans-unit id="02d4482d332e1aef3437cd61c9bcc624">
-        <source>Contact us</source>
-        <target>Contact us</target>
-      </trans-unit>
       <trans-unit id="bcc254b55c4a1babdf1dcb82c207506b">
         <source>Phone</source>
         <target>Phone</target>
@@ -70,9 +194,9 @@
         <source>Opening hours</source>
         <target>Opening hours</target>
       </trans-unit>
-      <trans-unit id="a6fb493e0d6afa32b3ca332ea78d9d1c">
-        <source>We will call you back</source>
-        <target>We will call you back</target>
+      <trans-unit id="349e686330723975502e9ef4f939a5ac">
+        <source>closed</source>
+        <target>closed</target>
       </trans-unit>
       <trans-unit id="b9d159395d9b9dc3b638b7803399aca3">
         <source>How should we contact you?</source>
@@ -86,10 +210,6 @@
         <source>e.g. 600 100 200</source>
         <target>e.g. 600 100 200</target>
       </trans-unit>
-      <trans-unit id="7df61a0962e018c22de96180a1eef6b6">
-        <source>We will write back to you</source>
-        <target>We will write back to you</target>
-      </trans-unit>
       <trans-unit id="bc82c84acc0c68f760ecd5bac0dddc7d">
         <source>Your e-mail address</source>
         <target>Your e-mail address</target>
@@ -97,18 +217,6 @@
       <trans-unit id="b2217640fbc13f12d39a3292cc88ab21">
         <source>e.g. name@company.com</source>
         <target>e.g. name@company.com</target>
-      </trans-unit>
-      <trans-unit id="25d021d9d39b195ff3dcab932ee59448">
-        <source>I agree to the processing of my personal data in order to be contacted.</source>
-        <target>I agree to the processing of my personal data in order to be contacted.</target>
-      </trans-unit>
-      <trans-unit id="56c34c6410dd45c5cec44149ad0ce037">
-        <source>Privacy policy</source>
-        <target>Privacy policy</target>
-      </trans-unit>
-      <trans-unit id="76dff9cf9e73cd3db7c2e7b3b2a524f6">
-        <source>Call me back</source>
-        <target>Call me back</target>
       </trans-unit>
     </body>
   </file>

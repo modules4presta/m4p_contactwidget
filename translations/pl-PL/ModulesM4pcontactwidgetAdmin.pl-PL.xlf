@@ -30,13 +30,113 @@
         <source>Enter the number of days as 0 or more.</source>
         <target>Podaj liczbę dni jako 0 lub więcej.</target>
       </trans-unit>
+      <trans-unit id="e19752a8472c4c9e4429b64604fc5de3">
+        <source>Enter the hours as from–to, e.g. 7:30-16:00, or leave the day empty when the desk is closed. Nothing was saved.</source>
+        <target>Wpisz godziny jako od–do, np. 7:30-16:00, albo zostaw dzień pusty, gdy dział nie pracuje. Nic nie zapisano.</target>
+      </trans-unit>
+      <trans-unit id="fcccea7ed1a0c807a712ab48061a4655">
+        <source>Write each exception on its own line as a date and hours, e.g. 2026-12-24 8:00-12:00, or a date and "closed". Nothing was saved.</source>
+        <target>Każdy wyjątek w osobnym wierszu: data i godziny, np. 2026-12-24 8:00-12:00, albo data i „closed”. Nic nie zapisano.</target>
+      </trans-unit>
+      <trans-unit id="fba03976be6d1d408890a1fc3652df2c">
+        <source>Enter the distance on phones as a number from 0 to 200. Nothing was saved.</source>
+        <target>Wpisz odstęp na telefonach jako liczbę od 0 do 200. Nic nie zapisano.</target>
+      </trans-unit>
+      <trans-unit id="cfa20c2be6a2df5b8c1a0abac15b20ca">
+        <source>Enter the privacy policy address in full, starting with https://, or leave it empty. Nothing was saved.</source>
+        <target>Wpisz pełny adres polityki prywatności, zaczynający się od https://, albo zostaw pole puste. Nic nie zapisano.</target>
+      </trans-unit>
       <trans-unit id="f38f5974cdc23279ffe6d203641a8bdf">
         <source>Settings updated.</source>
         <target>Ustawienia zapisane.</target>
       </trans-unit>
+      <trans-unit id="93cba07454f06a4a960172bbd6e2a435">
+        <source>Yes</source>
+        <target>Tak</target>
+      </trans-unit>
+      <trans-unit id="bafd7322c6e97d25b6299b5d6fe8920b">
+        <source>No</source>
+        <target>Nie</target>
+      </trans-unit>
+      <trans-unit id="7b19b37e7fc3dfe3c3e1ad5b84c7f565">
+        <source>Home page</source>
+        <target>Strona główna</target>
+      </trans-unit>
+      <trans-unit id="138e54532ba071f0046271304e6c1359">
+        <source>Category pages</source>
+        <target>Kategorie</target>
+      </trans-unit>
+      <trans-unit id="f4e01b4c717593dd98723eaa3c68b423">
+        <source>Product pages</source>
+        <target>Karty produktów</target>
+      </trans-unit>
+      <trans-unit id="325d1eb477abb3186337985b978b7393">
+        <source>Content pages (CMS)</source>
+        <target>Strony treści (CMS)</target>
+      </trans-unit>
+      <trans-unit id="eb6b06cab0dd72e04c4da68d511facf2">
+        <source>Search results</source>
+        <target>Wyniki wyszukiwania</target>
+      </trans-unit>
+      <trans-unit id="9c7a370518b589f333e6732f1881527f">
+        <source>Brands and suppliers</source>
+        <target>Marki i dostawcy</target>
+      </trans-unit>
+      <trans-unit id="a119f2cab961c4f9cc93dbd88d8f1a7f">
+        <source>New products, best sellers and price drops</source>
+        <target>Nowości, bestsellery i promocje</target>
+      </trans-unit>
+      <trans-unit id="c4de552cc7ca29b3d5754821192bf49f">
+        <source>Contact page and our stores</source>
+        <target>Kontakt i nasze sklepy</target>
+      </trans-unit>
+      <trans-unit id="a85eba4c6c699122b2bb1387ea4813ad">
+        <source>Cart</source>
+        <target>Koszyk</target>
+      </trans-unit>
+      <trans-unit id="6ff063fbc860a79759a7369ac32cee22">
+        <source>Checkout</source>
+        <target>Zamówienie (kasa)</target>
+      </trans-unit>
+      <trans-unit id="fb077ecba55e5552916bde26d8b9e794">
+        <source>Order confirmation</source>
+        <target>Potwierdzenie zamówienia</target>
+      </trans-unit>
+      <trans-unit id="fd58521450681375cfd083aa58fef21f">
+        <source>Log in, registration and password reset</source>
+        <target>Logowanie, rejestracja i odzyskiwanie hasła</target>
+      </trans-unit>
+      <trans-unit id="9943ed6a521058c3551930b1901a21bc">
+        <source>Customer account</source>
+        <target>Konto klienta</target>
+      </trans-unit>
+      <trans-unit id="c3b63dac67ce1b53f3ad6bf55f9077fd">
+        <source>Other pages (e.g. blog, 404 page, sitemap)</source>
+        <target>Pozostałe strony (np. blog, strona 404, mapa strony)</target>
+      </trans-unit>
       <trans-unit id="b8a83f25767634ffc64f097e28254006">
         <source>None (no link)</source>
         <target>Brak (bez linku)</target>
+      </trans-unit>
+      <trans-unit id="03f4a47830f97377a35321051685071e">
+        <source>Closed</source>
+        <target>Nieczynne</target>
+      </trans-unit>
+      <trans-unit id="efafa28f87e776eb2b75b50656a99225">
+        <source>From–to, e.g. 7:30-16:00. Empty: closed that day. With no day filled in, the button shows no status and the panel shows the opening hours text instead. The hours of the sales department in M4P Core replace these when set.</source>
+        <target>Od–do, np. 7:30-16:00. Puste: dział nie pracuje tego dnia. Gdy żaden dzień nie jest wypełniony, przycisk nie pokazuje statusu, a panel pokazuje godziny pracy wpisane jako tekst. Godziny działu sprzedaży z M4P Core, gdy są wpisane, zastępują te godziny.</target>
+      </trans-unit>
+      <trans-unit id="930800441b7ceea300e3cb6f6a264b71">
+        <source>Button label</source>
+        <target>Napis na przycisku</target>
+      </trans-unit>
+      <trans-unit id="4eb4f272d11bf185669b11da4c52b933">
+        <source>Show the hours on the button</source>
+        <target>Godziny na przycisku</target>
+      </trans-unit>
+      <trans-unit id="aefb09ef0e0f84766720be2a280c0014">
+        <source>Open now or the next opening time next to the label, with the status dot. Off: the label alone.</source>
+        <target>„Otwarte” albo najbliższa godzina otwarcia obok napisu, z kropką stanu. Wyłączone – sam napis.</target>
       </trans-unit>
       <trans-unit id="0101316665d4f82adaa26d86fbbb2d6e">
         <source>Heading</source>
@@ -46,13 +146,21 @@
         <source>Text under the heading</source>
         <target>Tekst pod nagłówkiem</target>
       </trans-unit>
+      <trans-unit id="498fc876a39ebb2568d47d0f09e6c216">
+        <source>Show the phone</source>
+        <target>Pokazuj telefon</target>
+      </trans-unit>
       <trans-unit id="bcc254b55c4a1babdf1dcb82c207506b">
         <source>Phone</source>
         <target>Telefon</target>
       </trans-unit>
-      <trans-unit id="35e16b22fc97383c8982d804995f0652">
-        <source>Shown as written; the link dials the digits. Empty hides the row.</source>
-        <target>Wyświetlany tak, jak wpisany; link wybiera same cyfry. Puste pole ukrywa wiersz.</target>
+      <trans-unit id="6b95a2011ab7abd2a338d227b13c8aef">
+        <source>Shown as written; the link dials the digits. Empty hides the row. The phone of the sales department in M4P Core replaces it when set.</source>
+        <target>Wyświetlany tak, jak wpisany; link wybiera same cyfry. Puste pole ukrywa wiersz. Telefon działu sprzedaży z M4P Core, gdy jest wpisany, zastępuje ten numer.</target>
+      </trans-unit>
+      <trans-unit id="4f28eb624f26bccf7e07fa424bed03c5">
+        <source>Show the e-mail</source>
+        <target>Pokazuj e-mail</target>
       </trans-unit>
       <trans-unit id="1e884e3078d9978e216a027ecd57fb34">
         <source>E-mail</source>
@@ -62,25 +170,101 @@
         <source>Empty hides the row.</source>
         <target>Puste pole ukrywa wiersz.</target>
       </trans-unit>
-      <trans-unit id="80a0c205cd57b22fca7f174253870300">
-        <source>Opening hours</source>
-        <target>Godziny pracy</target>
+      <trans-unit id="cf243428972dfb86dc8340ee8e8ca6ce">
+        <source>Opening hours text</source>
+        <target>Godziny pracy (tekst)</target>
+      </trans-unit>
+      <trans-unit id="68d1d4d43c0033715ac1b2931922c63a">
+        <source>Shown only when no weekly hours are set below. Empty hides the row.</source>
+        <target>Widoczne tylko, gdy niżej nie ma godzin na dni tygodnia. Puste ukrywa wiersz.</target>
+      </trans-unit>
+      <trans-unit id="7acb6dea2173063c205b2b1de87c7576">
+        <source>Hide the widget on</source>
+        <target>Ukryj widget na stronach</target>
       </trans-unit>
       <trans-unit id="7d20f64b783f57787daf965663038c1f">
         <source>Speech bubble</source>
         <target>Dymek</target>
       </trans-unit>
-      <trans-unit id="920d6e00e58982ea183ec53282575059">
-        <source>Shown next to the button once per visitor. Empty turns it off.</source>
-        <target>Pokazywany przy przycisku raz na odwiedzającego. Puste pole go wyłącza.</target>
+      <trans-unit id="b075ec4ffbc7ad30c8d89b00e4f8af83">
+        <source>Shown next to the button once per visit, after the visitor scrolls past the first screen. Empty turns it off.</source>
+        <target>Pokazywany obok przycisku raz na wizytę, gdy klient przewinie stronę za pierwszy ekran. Puste wyłącza dymek.</target>
+      </trans-unit>
+      <trans-unit id="dbf9957d188de4e879757024d84c1e67">
+        <source>Call-back by phone</source>
+        <target>Oddzwonienie na telefon</target>
+      </trans-unit>
+      <trans-unit id="d48bd76fb60e6178ab112ab14677ec97">
+        <source>The visitor leaves a phone number.</source>
+        <target>Klient zostawia numer telefonu.</target>
+      </trans-unit>
+      <trans-unit id="727dfdf88984dcdccaf163519258623d">
+        <source>Reply by e-mail</source>
+        <target>Odpowiedź e-mailem</target>
+      </trans-unit>
+      <trans-unit id="29d61f5f305f6eb85618f4ad7a5f35a9">
+        <source>The visitor leaves an e-mail address. With both options off the form is hidden.</source>
+        <target>Klient zostawia adres e-mail. Gdy obie opcje są wyłączone, formularz się nie pokazuje.</target>
+      </trans-unit>
+      <trans-unit id="550a64873e9da13bb0f44d0ea3dd3dd5">
+        <source>Form heading for a call-back</source>
+        <target>Nagłówek formularza – oddzwonienie</target>
+      </trans-unit>
+      <trans-unit id="a2aa80da5e4abe39e1ab8f210f7b8aca">
+        <source>Button for a call-back</source>
+        <target>Przycisk – oddzwonienie</target>
+      </trans-unit>
+      <trans-unit id="56e4220d5794ebec727df0957434c113">
+        <source>Form heading for an e-mail reply</source>
+        <target>Nagłówek formularza – odpowiedź e-mailem</target>
+      </trans-unit>
+      <trans-unit id="f83cebfdcfeaf4e2b0017b37eca4c015">
+        <source>Button for an e-mail reply</source>
+        <target>Przycisk – odpowiedź e-mailem</target>
+      </trans-unit>
+      <trans-unit id="60708a089b7e47b1ece89508685002d3">
+        <source>Call-back note during opening hours</source>
+        <target>Dopisek pod formularzem w godzinach pracy</target>
+      </trans-unit>
+      <trans-unit id="eb6b69ed59a4c39f1ccbcc49ae108b24">
+        <source>Under the form heading while the desk is open, e.g. when you call back.</source>
+        <target>Pod nagłówkiem formularza, gdy dział pracuje, np. kiedy oddzwaniacie.</target>
+      </trans-unit>
+      <trans-unit id="c7b279aebbf02429853059d2068d050c">
+        <source>Call-back note outside opening hours</source>
+        <target>Dopisek pod formularzem po godzinach pracy</target>
+      </trans-unit>
+      <trans-unit id="5cc4a637debb99b0ec85116ed94a0e3f">
+        <source>Consent text</source>
+        <target>Treść zgody</target>
+      </trans-unit>
+      <trans-unit id="7550e88cf1302615c4f4f28b74b6352f">
+        <source>Next to the checkbox the visitor has to tick before sending.</source>
+        <target>Przy polu, które klient musi zaznaczyć przed wysłaniem.</target>
+      </trans-unit>
+      <trans-unit id="bbc58d52503cc500c4927cac9f86512c">
+        <source>Privacy policy link text</source>
+        <target>Tekst linku do polityki prywatności</target>
+      </trans-unit>
+      <trans-unit id="3ba39e057306f5de260670a06d51d5be">
+        <source>Shown after the consent text. Empty: no link.</source>
+        <target>Za treścią zgody. Puste – bez linku.</target>
       </trans-unit>
       <trans-unit id="3b75aac75dc5f26614dab746da7b081d">
         <source>Privacy policy page</source>
         <target>Strona polityki prywatności</target>
       </trans-unit>
-      <trans-unit id="e6b13a43d761a3d3ec1977496fbcb461">
-        <source>Linked from the consent under the form.</source>
-        <target>Link w zgodzie pod formularzem.</target>
+      <trans-unit id="fd574ba5a53db25847b3bc38df2d9235">
+        <source>Privacy policy address</source>
+        <target>Adres polityki prywatności</target>
+      </trans-unit>
+      <trans-unit id="4cf9635c597d6ed7da33c4eeb0f2e650">
+        <source>Fill in only when the policy is not a page of the shop, e.g. https://example.com/privacy. When filled in, the link leads here instead of the page above.</source>
+        <target>Tylko gdy polityka nie jest stroną sklepu, np. https://example.com/polityka. Wypełniony adres zastępuje stronę wybraną wyżej.</target>
+      </trans-unit>
+      <trans-unit id="8da5e2af06a0859c5fb3f7c91dc2c970">
+        <source>Message after sending</source>
+        <target>Komunikat po wysłaniu</target>
       </trans-unit>
       <trans-unit id="e480686f42911546de1f314c272014e8">
         <source>Notification e-mail</source>
@@ -102,17 +286,25 @@
         <source>Older submissions are deleted once a day. Enter 0 to keep them until you delete them yourself.</source>
         <target>Starsze zgłoszenia są usuwane raz na dobę. Wpisz 0, aby trzymać je do ręcznego usunięcia.</target>
       </trans-unit>
+      <trans-unit id="35947f04c5e7c822a4e5a2107dcd64cf">
+        <source>Distance from the bottom on phones</source>
+        <target>Odstęp od dołu na telefonach</target>
+      </trans-unit>
+      <trans-unit id="c36ad32aa527964d59796ac008a101a3">
+        <source>Lifts the button above bars fixed to the bottom of the screen, from 0 to 200. Themes can also set the CSS variable --m4p-contact-offset on a page.</source>
+        <target>Podnosi przycisk nad paski przypięte do dołu ekranu, od 0 do 200. Motyw może też ustawić na stronie zmienną CSS --m4p-contact-offset.</target>
+      </trans-unit>
+      <trans-unit id="15d899b0c3f22d0eb92c47674179e617">
+        <source>Elements the button does not cover</source>
+        <target>Elementy, których przycisk nie zasłania</target>
+      </trans-unit>
+      <trans-unit id="d63701604800493cdf4011013b4d521f">
+        <source>CSS selectors separated by commas, e.g. the slider controls or the cookie banner. While the button would cover one of them, it hides until the page is scrolled.</source>
+        <target>Selektory CSS rozdzielone przecinkami, np. przyciski slidera albo baner cookies. Gdy przycisk zasłoniłby któryś z nich, chowa się do czasu przewinięcia strony.</target>
+      </trans-unit>
       <trans-unit id="c47746fa7da6748f28b6c3da52885908">
         <source>Load the module stylesheet</source>
         <target>Wczytuj style modułu</target>
-      </trans-unit>
-      <trans-unit id="93cba07454f06a4a960172bbd6e2a435">
-        <source>Yes</source>
-        <target>Tak</target>
-      </trans-unit>
-      <trans-unit id="bafd7322c6e97d25b6299b5d6fe8920b">
-        <source>No</source>
-        <target>Nie</target>
       </trans-unit>
       <trans-unit id="b144f9cbdce75ec35cf8f6ccda4a8b0c">
         <source>Turn it off when the theme styles the widget itself.</source>
@@ -125,6 +317,30 @@
       <trans-unit id="c9cc8cce247e49bae79f15173ce97354">
         <source>Save</source>
         <target>Zapisz</target>
+      </trans-unit>
+      <trans-unit id="c926712e31d75e1fa24017a3162f1998">
+        <source>Call-back form</source>
+        <target>Formularz kontaktu zwrotnego</target>
+      </trans-unit>
+      <trans-unit id="ae5e1951993e0900f7aedba62157797c">
+        <source>Notifications and display</source>
+        <target>Powiadomienia i wyświetlanie</target>
+      </trans-unit>
+      <trans-unit id="80a0c205cd57b22fca7f174253870300">
+        <source>Opening hours</source>
+        <target>Godziny pracy</target>
+      </trans-unit>
+      <trans-unit id="74040bd8f7e171fd1636763d27a9d7f0">
+        <source>The button shows whether the desk is open now, counted in the shop time zone.</source>
+        <target>Przycisk pokazuje, czy dział pracuje teraz – według strefy czasowej sklepu.</target>
+      </trans-unit>
+      <trans-unit id="d5f1381c5f97f928df4ef8d18c2a27c0">
+        <source>Exceptions</source>
+        <target>Wyjątki</target>
+      </trans-unit>
+      <trans-unit id="da1e7caae0eefebafb249465651edca2">
+        <source>One date per line, e.g. 2026-12-24 8:00-12:00 or 2026-12-25 closed. The next two weeks show in the panel.</source>
+        <target>Jedna data w wierszu, np. 2026-12-24 8:00-12:00 albo 2026-12-25 closed. Panel pokazuje wyjątki z najbliższych dwóch tygodni.</target>
       </trans-unit>
       <trans-unit id="051c0d593530ca8b1fe07fe3790c69c5">
         <source>New request from the contact widget</source>

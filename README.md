@@ -20,22 +20,25 @@ That asymmetry is the whole point of the widget. You are not collecting enquirie
 
 ## What the module does
 
-A button sits in the corner of the shop. Clicking it opens a panel with your heading and a short text, your phone number, e-mail address and opening hours, and a "we will call you back" form: a phone/e-mail switch, one field and a consent checkbox linking to your privacy policy. A submission is stored, listed in **Customers → Contact widget requests** and e-mailed to the address you choose. The widget is left out of the cart and the checkout; it adds nothing else to the page and touches no other module.
+A labelled button sits in the corner of the shop and says whether your desk is open now ("open until 16:00", "tomorrow from 7:30"). Clicking it opens a panel with your heading and a short text, your phone number, e-mail address and opening hours, and a "we will call you back" form: a phone/e-mail switch, one field and a consent checkbox linking to your privacy policy. A submission is stored, listed in **Customers → Contact widget requests** and e-mailed to the address you choose. By default the widget is left out of the cart and the checkout, and the list of page types without it is yours to change; it adds nothing else to the page and touches no other module.
 
 ### Key features
 
 - **Your contact details in one place** – heading, text, phone, e-mail and opening hours, edited per language in the configuration; an empty field hides its row.
+- **Open or closed, live** – opening hours per weekday plus dated exceptions (holidays); the button (unless switched off) and the panel show the status in the shop's time zone and keep it current every minute, and the note under the form changes with it.
+- **Out of the way on phones** – a square button that respects the safe area of the screen, a panel opening as a sheet from the bottom, a distance setting for bars fixed to the bottom, and a list of elements (slider controls, cookie banner) the button steps aside for while it would cover them.
 - **Phone or e-mail** – the visitor picks; the field switches its type, label and keyboard, phone numbers are normalised, e-mail addresses validated.
-- **Consent, with your own policy** – the checkbox is required and links to the CMS page you select.
+- **Consent, with your own policy** – the checkbox is required; its text, the link text and the target (a CMS page or any address) are set per language.
+- **Channels you choose** – the phone row, the e-mail row and each option of the form (call-back by phone, reply by e-mail) have their own switch.
 - **Abuse guards** – a token tied to the visitor's own cookie, a honeypot field, and limits per browser, per address and per shop.
 - **Cache-friendly** – the page markup is the same for every visitor; the form token is fetched when the visitor sends the form, so full-page caches can keep the page.
 - **Submissions in the back office** – a list under Customers with filters, sorting, CSV export, `tel:`/`mailto:` links, and deleting per row or in bulk.
-- **Speech bubble** – an optional short message next to the button, shown once per browser after the visitor's first scroll.
-- **Accessible** – the panel is a labelled dialog that takes focus on open, closes on Esc or a click outside and returns focus to the button; errors are announced.
+- **Speech bubble** – an optional short message next to the button, shown once per visit after the visitor scrolls past the first screen.
+- **Accessible** – the button names the desk status, the panel is a labelled dialog that takes focus on open, keeps the keyboard inside, closes on Esc or a click outside and returns focus to the button; errors are announced.
 - **Retention you choose** – submissions older than the number of days you set are deleted once a day.
 - **Per shop in multistore** – every shop keeps its own list and its own settings.
-- **Its own icons** – Font Awesome Free icons inlined as SVG, so no icon font has to be present in the theme.
-- **Theme styling** – the module stylesheet can be switched off when the theme styles the widget itself.
+- **Its own icons** – Lucide icons inlined as SVG, so no icon font has to be present in the theme.
+- **Theme styling** – colours, radii, shadow and fonts come from `--m4p-cw-*` CSS variables a theme sets in its own stylesheet; the module stylesheet can also be switched off when the theme styles the widget itself.
 - **Optional notifications** – one e-mail per submission, or none if you prefer the list.
 - **Ready for measurement** – `data-cta-*` attributes say where the widget is, why it is on screen and which channel the visitor used, so an analytics script reads them without code of its own.
 
@@ -57,7 +60,7 @@ The rows live in one table that the module creates on install and drops on unins
 |---|---|
 | PrestaShop | 1.7.6 – 9.x |
 | PHP | 7.4+ |
-| Requirements | none – no external service, no captcha key, no icon font |
+| Requirements | none – no external service, no captcha key, no icon font; with [`m4p_core`](https://github.com/modules4presta/m4p_core) enabled, the phone and the weekly hours of its sales department are used when set there |
 | Multistore | Supported – each shop has its own submissions, its own list and its own settings; a deleted shop takes its submissions with it |
 | Themes | Renders in `displayBeforeBodyClosingTag`; the widget positions itself and needs no theme changes |
 
@@ -77,15 +80,30 @@ The privacy policy page is guessed on install from your CMS pages, so the link u
 
 | Setting | Description |
 |---|---|
+| **Button label** | Text on the button, per language, e.g. "Contact". |
+| **Show the hours on the button** | On by default: open now or the next opening time next to the label, with the status dot. Off: the label alone. |
 | **Heading** | Panel heading, per language. |
 | **Text under the heading** | One or two sentences under the heading, per language. |
-| **Phone** | Shown as written; the link dials the digits. Empty hides the row. |
+| **Show the phone / Show the e-mail** | Switch each row on or off without clearing the number or the address. |
+| **Phone** | Shown as written; the link dials the digits. Empty hides the row. With `m4p_core` enabled, the phone of its sales department takes precedence when set. |
 | **E-mail** | Shown as a `mailto:` link. Empty hides the row. |
-| **Opening hours** | Free text per language, e.g. "Mon–Fri 9:00–17:00". Empty hides the row. |
-| **Speech bubble** | Short message next to the button, shown once per visitor. Empty turns it off. |
-| **Privacy policy page** | The CMS page the consent text links to. Pick "None" to hide the link. |
+| **Hide the widget on** | Page types without the widget: home, categories, products, CMS, search, brands, listings, contact, cart, checkout, order confirmation, log-in pages, customer account, other pages (e.g. blog). Cart, checkout and order confirmation by default. |
+| **Opening hours text** | Free text per language, e.g. "Mon–Fri 9:00–17:00", shown only while no weekly hours are set. Empty hides the row. |
+| **Speech bubble** | Short message next to the button, shown once per visit after the visitor scrolls past the first screen. Empty turns it off. |
+| **Call-back by phone / Reply by e-mail** | The options of the form. With one on, the switch between them is hidden; with both off, the form is hidden. |
+| **Form heading and button, for a call-back and for an e-mail reply** | Per language; they follow the option the visitor picks. |
+| **Call-back note during / outside opening hours** | Line under the form heading, per language, following the desk status. |
+| **Consent text** | Text next to the required checkbox, per language. |
+| **Privacy policy link text** | Link after the consent text, per language. Empty hides the link. |
+| **Privacy policy page** | The CMS page the link leads to. Pick "None" to hide the link. |
+| **Privacy policy address** | Per language, for a policy outside the shop; when filled in it is used instead of the page. |
+| **Message after sending** | Shown in the panel once the request is saved, per language. |
 | **Notification e-mail** | Where each submission is e-mailed. Empty means no e-mail; submissions still appear in the list. |
 | **Keep submissions for** | Days a submission is kept before it is deleted automatically. 0 keeps everything until you delete it yourself. |
+| **Distance from the bottom on phones** | Lifts the button above a bar fixed to the bottom of the screen, 0–200 px. A theme can set `--m4p-contact-offset` on a page instead. |
+| **Elements the button does not cover** | CSS selectors, comma-separated. While the button would cover one of them it hides, until the page is scrolled. |
+| **Opening hours: Monday … Sunday** | From–to, e.g. `7:30-16:00`; empty means closed. With every day empty the button shows no status. With `m4p_core` enabled, the hours of its sales department take precedence when set. |
+| **Opening hours: exceptions** | One date per line: `2026-12-24 8:00-12:00` or `2026-12-25 closed`. The panel lists those in the next two weeks. |
 | **Load the module stylesheet** | On by default. Turn it off when your theme styles the widget; the theme then also hides the honeypot field (`.m4p-contact-widget__hp`). |
 
 In multistore the settings belong to the shop selected in the selector, so one shop can notify a different address than another.
@@ -118,7 +136,7 @@ The markup carries attributes an analytics script can read, and a sent form is p
 | `data-cta-dismiss` | close buttons of the panel and the bubble | – |
 
 **Is it shown on every page?**
-On every front-office page except the cart, the checkout and the order confirmation, where the buyer should not be pulled away from finishing the order.
+On every front-office page except the page types ticked under **Hide the widget on** – by default the cart, the checkout and the order confirmation, where the buyer should not be pulled away from finishing the order.
 
 ---
 
@@ -126,7 +144,7 @@ On every front-office page except the cart, the checkout and the order confirmat
 
 ## Third-party assets
 
-The icons in `views/img` are [Font Awesome Free](https://fontawesome.com) 6.7.2 (CC BY 4.0); each file keeps its licence comment.
+The icons in `views/img` are [Lucide](https://lucide.dev) icons (ISC licence), with the licence in `views/img/LICENSE-lucide.txt`.
 
 ## License
 
