@@ -4,6 +4,72 @@ All notable changes to this module are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the module uses
 [semantic versioning](https://semver.org/).
 
+## [3.5.0] - 2026-11-25
+
+### Added
+
+- Switch "Show the hours on the button": with it off the floating button shows the label alone, without the
+  status dot and the open now / next opening time. The upgrade turns it on.
+
+### Changed
+
+- The default call-back note outside opening hours reads "We will call you back as soon as we open." It is
+  written on install and only where no note is stored yet.
+
+## [3.4.0] - 2026-11-25
+
+### Changed
+
+- With the `m4p_core` module enabled, the phone and the weekly hours come from its sales department
+  (`M4P_CORE_SALES_PHONE`, `M4P_CORE_SALES_HOURS`) when they are set there, so the header, the footer and the
+  widget show the same data. The widget's own fields apply otherwise.
+
+## [3.3.0] - 2026-11-19
+
+### Added
+
+- A switch for each channel: the phone row, the e-mail row, call-back by phone and reply by e-mail in the form.
+  With one form option on, the switch between them is hidden; with both off, the form is hidden.
+- Page types without the widget, chosen in the configuration; cart, checkout and order confirmation by default.
+- Per-language form headings and buttons for both options, the consent text, the privacy link text and the
+  message after sending.
+- Privacy policy address per language, used instead of the CMS page for a policy outside the shop.
+
+### Changed
+
+- The configuration is split into the widget, the call-back form, opening hours, and notifications and display.
+- A wrong phone number, e-mail address or missing consent shows as a field error with an icon under that control,
+  tied to it with `aria-invalid` and `aria-describedby`; a sending error and the thank-you text show as message
+  blocks with an icon. With a theme's `m4p-msg` / `m4p-field-error` components they take the theme's look;
+  otherwise the module stylesheet draws them, and `--m4p-cw-error-wash` sets the error block background.
+- The upgrade keeps the widget as it was: every channel on, hidden in the cart and the checkout, the texts it
+  showed so far.
+
+## [3.2.0] - 2026-11-19
+
+### Added
+
+- Opening hours per weekday (from–to or closed) and dated exceptions, with the desk status computed in the shop's
+  time zone: "open until 16:00", "closed, we open tomorrow at 7:30". The button and the panel show it, the script
+  keeps it current every minute, and the panel lists the week and the exceptions of the next two weeks.
+- Button label per language; the button shows the label and the status, on phones a square button with a status dot.
+- Call-back note under the form heading, per language, one for opening hours and one for outside them.
+- On phones: the panel opens as a sheet from the bottom, the button respects the safe area, a distance setting lifts
+  it above bars fixed to the bottom (`--m4p-contact-offset` for themes), and a list of CSS selectors it steps aside
+  for while it would cover them.
+- The speech bubble shows once per visit, after the visitor scrolls past the first screen, so it never covers the
+  page opening.
+- `--m4p-cw-*` CSS variables for the colours, radii, shadow and display font, read at zero specificity so a theme's
+  own values win.
+- Keyboard focus stays in the open panel; the submit button names the chosen channel.
+
+### Changed
+
+- The panel shows the phone first in large type, channels with arrows, the call-back form on a tinted ground with
+  the input and the button in one row. Themes overriding `widget.tpl` need to follow the new markup.
+- Icons are Lucide (ISC), drawn as strokes; the button carries a phone icon.
+- The opening hours text shows while no weekly hours are set.
+
 ## [3.1.0] - 2026-11-12
 
 ### Added

@@ -6,34 +6,100 @@
  * @license   https://opensource.org/licenses/MIT MIT License
  */
 
+/* A theme restyles the widget through these variables; --m4p-contact-offset lifts it above bars fixed to the
+   bottom of a page (a theme sets it per page, the module setting adds a fixed amount on phones). */
+:where(.m4p-contact-widget) {
+    --m4p-cw-ink: #1c1c1a;
+    --m4p-cw-on-ink: #fff;
+    --m4p-cw-on-ink-2: #d6d1c4;
+    --m4p-cw-surface: #fff;
+    --m4p-cw-ground: #f4f4f1;
+    --m4p-cw-text-2: #5f5b52;
+    --m4p-cw-text-3: #7a756b;
+    --m4p-cw-line: #d5d5cd;
+    --m4p-cw-line-soft: #e6e6e0;
+    --m4p-cw-accent: #0f5257;
+    --m4p-cw-accent-wash: #e2ecea;
+    --m4p-cw-ok: #1a7a3e;
+    --m4p-cw-ok-wash: #e6f4ec;
+    --m4p-cw-ok-dot: #7fd18b;
+    --m4p-cw-off-dot: #b9b4a8;
+    --m4p-cw-error: #c0392b;
+    --m4p-cw-error-wash: #fbeceb;
+    --m4p-cw-radius: 10px;
+    --m4p-cw-radius-sm: 6px;
+    --m4p-cw-shadow: 0 1px 2px rgba(28, 28, 26, .08), 0 12px 32px -8px rgba(28, 28, 26, .28);
+    --m4p-cw-font-display: inherit;
+    --m4p-cw-edge: 24px;
+    --m4p-contact-offset: 0px;
+}
 .m4p-contact-widget {
     position: fixed;
-    right: 20px;
-    bottom: 20px;
+    right: var(--m4p-cw-edge);
+    bottom: calc(var(--m4p-cw-edge) + var(--m4p-contact-offset) + env(safe-area-inset-bottom, 0px));
     z-index: 1050;
-    font-size: 14px;
+    display: grid;
+    justify-items: end;
+    gap: 12px;
+    font-size: 15px;
+    line-height: 1.45;
+    color: var(--m4p-cw-ink);
 }
 .m4p-contact-widget [hidden] {
     display: none !important;
 }
 .m4p-contact-widget__svg {
     display: block;
-    width: 1em;
-    height: 1em;
+    width: 18px;
+    font-size: inherit;
+    height: 18px;
+    flex: none;
 }
+
+/* Launcher: a labelled dark button with the desk status. */
 .m4p-contact-widget__fab {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    width: 56px;
-    height: 56px;
+    justify-content: flex-start;
+    gap: 10px;
+    width: auto;
+    height: 52px;
+    font-size: 15px;
+    padding: 0 18px 0 14px;
     border: 0;
-    border-radius: 50%;
-    background: #222;
-    color: #fff;
-    font-size: 22px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, .2);
+    border-radius: var(--m4p-cw-radius);
+    background: var(--m4p-cw-ink);
+    color: var(--m4p-cw-on-ink);
+    box-shadow: var(--m4p-cw-shadow);
+    font: inherit;
     cursor: pointer;
+}
+.m4p-contact-widget__fab:focus-visible {
+    outline: 3px solid var(--m4p-cw-accent);
+    outline-offset: 2px;
+}
+.m4p-contact-widget__fab-label {
+    font-family: var(--m4p-cw-font-display);
+    font-weight: 600;
+}
+.m4p-contact-widget__fab-status {
+    padding-left: 10px;
+    border-left: 1px solid rgba(255, 255, 255, .2);
+    color: var(--m4p-cw-on-ink-2);
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+.m4p-contact-widget__dot {
+    width: 8px;
+    height: 8px;
+    flex: none;
+    border-radius: 50%;
+    background: var(--m4p-cw-off-dot);
+}
+.m4p-contact-widget.is-available .m4p-contact-widget__dot {
+    background: var(--m4p-cw-ok-dot);
+    box-shadow: 0 0 0 3px rgba(127, 209, 139, .25);
 }
 .m4p-contact-widget__fab-icon--close,
 .m4p-contact-widget.is-open .m4p-contact-widget__fab-icon--open {
@@ -42,19 +108,23 @@
 .m4p-contact-widget.is-open .m4p-contact-widget__fab-icon--close {
     display: block;
 }
+
+/* Speech bubble and panel sit above the launcher. */
 .m4p-contact-widget__bubble,
 .m4p-contact-widget__panel {
-    position: absolute;
-    right: 0;
-    bottom: calc(100% + 12px);
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, .2);
+    position: relative;
+    right: auto;
+    bottom: auto;
+    background: var(--m4p-cw-surface);
+    border: 1px solid var(--m4p-cw-line-soft);
+    border-radius: var(--m4p-cw-radius);
+    box-shadow: var(--m4p-cw-shadow);
 }
 .m4p-contact-widget__bubble {
     display: flex;
+    align-items: flex-start;
     gap: 8px;
-    width: 240px;
+    width: 260px;
     padding: 12px 14px;
     cursor: pointer;
 }
@@ -62,94 +132,411 @@
     margin: 0;
 }
 .m4p-contact-widget__panel {
-    width: min(340px, calc(100vw - 40px));
-    max-height: calc(100vh - 120px);
-    padding: 18px;
+    width: 380px;
+    padding: 0;
+    max-width: calc(100vw - 2 * var(--m4p-cw-edge));
+    max-height: calc(100vh - 120px - var(--m4p-contact-offset));
     overflow: auto;
+    overscroll-behavior: contain;
 }
 .m4p-contact-widget__head {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
     gap: 12px;
+    padding: 18px 20px 12px;
 }
 .m4p-contact-widget__title {
-    margin: 0 0 8px;
-    font-size: 18px;
+    margin: 0;
+    font-family: var(--m4p-cw-font-display);
+    font-size: 19px;
+    font-weight: 600;
+    line-height: 1.2;
+}
+.m4p-contact-widget__title:focus {
+    outline: none;
+}
+.m4p-contact-widget__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 6px 0 0;
+    padding: 3px 8px;
+    border-radius: var(--m4p-cw-radius-sm);
+    background: var(--m4p-cw-ground);
+    color: var(--m4p-cw-text-2);
+    font-size: 13px;
+    font-weight: 600;
+}
+.m4p-contact-widget__badge::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: currentColor;
+}
+.m4p-contact-widget__badge.is-open {
+    background: var(--m4p-cw-ok-wash);
+    color: var(--m4p-cw-ok);
 }
 .m4p-contact-widget__close,
 .m4p-contact-widget__bubble-close {
-    padding: 4px;
-    border: 0;
-    background: none;
+    display: grid;
+    place-items: center;
+    flex: none;
+    padding: 0;
+    border: 1px solid var(--m4p-cw-line);
+    border-radius: var(--m4p-cw-radius-sm);
+    background: var(--m4p-cw-surface);
+    color: inherit;
     cursor: pointer;
 }
-.m4p-contact-widget__intro,
-.m4p-contact-widget__form-title {
-    margin: 0 0 12px;
+.m4p-contact-widget__close {
+    width: 36px;
+    height: 36px;
 }
+.m4p-contact-widget__bubble-close {
+    width: 28px;
+    height: 28px;
+    border: 0;
+}
+.m4p-contact-widget__intro {
+    margin: 0 20px 8px;
+    color: var(--m4p-cw-text-2);
+    font-size: 14px;
+}
+
+/* Channels: phone first and large; rows divided, the last one without a line. */
 .m4p-contact-widget__channels {
-    margin: 0 0 16px;
-    padding: 0;
+    margin: 0;
+    padding: 0 20px;
     list-style: none;
+}
+.m4p-contact-widget__channels > li + li {
+    border-top: 1px solid var(--m4p-cw-line-soft);
 }
 .m4p-contact-widget__channel {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 8px 0;
+    gap: 12px;
+    padding: 12px 0;
     color: inherit;
+    text-decoration: none;
+}
+.m4p-contact-widget__channel-icon {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    flex: none;
+    border-radius: var(--m4p-cw-radius-sm);
+    background: var(--m4p-cw-accent-wash);
+    color: var(--m4p-cw-accent);
 }
 .m4p-contact-widget__channel-body {
     display: flex;
     flex-direction: column;
+    min-width: 0;
 }
 .m4p-contact-widget__channel-label {
+    color: var(--m4p-cw-text-3);
     font-size: 12px;
-    opacity: .7;
 }
 .m4p-contact-widget__channel-value {
-    font-weight: 700;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    overflow-wrap: anywhere;
+}
+.m4p-contact-widget__channel--phone .m4p-contact-widget__channel-value {
+    font-family: var(--m4p-cw-font-display);
+    font-size: 20px;
+    line-height: 1.2;
+}
+.m4p-contact-widget__channel-go {
+    margin-left: auto;
+    color: var(--m4p-cw-text-3);
+}
+a.m4p-contact-widget__channel:hover .m4p-contact-widget__channel-value {
+    color: var(--m4p-cw-accent);
+}
+
+/* Opening hours */
+.m4p-contact-widget__hours {
+    display: grid;
+    gap: 4px;
+    margin: 0 20px;
+    padding: 10px 0 14px;
+    border-top: 1px solid var(--m4p-cw-line-soft);
+    font-size: 14px;
+    font-variant-numeric: tabular-nums;
+}
+.m4p-contact-widget__hours-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+}
+.m4p-contact-widget__hours dt {
+    color: var(--m4p-cw-text-2);
+    font-weight: 400;
+}
+.m4p-contact-widget__hours dd {
+    margin: 0;
+    text-align: right;
+}
+.m4p-contact-widget__hours-row.is-today dt,
+.m4p-contact-widget__hours-row.is-today dd {
+    color: var(--m4p-cw-ink);
+    font-weight: 600;
+}
+
+/* Call-back form */
+.m4p-contact-widget__form,
+.m4p-contact-widget__done {
+    display: grid;
+    gap: 10px;
+    padding: 16px 20px 18px;
+    border-top: 1px solid var(--m4p-cw-line-soft);
+    background: var(--m4p-cw-ground);
+}
+.m4p-contact-widget__form > *,
+.m4p-contact-widget__row > * {
+    min-width: 0;
+}
+.m4p-contact-widget__form-title {
+    margin: 0;
+    font-family: var(--m4p-cw-font-display);
+    font-size: 15px;
+    font-weight: 600;
+}
+.m4p-contact-widget__form-note {
+    display: block;
+    margin-top: 2px;
+    color: var(--m4p-cw-text-2);
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 400;
 }
 .m4p-contact-widget__switch {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 10px;
+    display: inline-flex;
+    justify-self: start;
+    border: 1px solid var(--m4p-cw-line);
+    border-radius: var(--m4p-cw-radius-sm);
+    background: var(--m4p-cw-surface);
+    overflow: hidden;
+}
+.m4p-contact-widget__switch-option {
+    position: relative;
+    margin: 0;
+    cursor: pointer;
+}
+.m4p-contact-widget__switch-option + .m4p-contact-widget__switch-option {
+    border-left: 1px solid var(--m4p-cw-line);
+}
+.m4p-contact-widget__switch-option input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+.m4p-contact-widget__switch-option span {
+    display: block;
+    padding: 6px 14px;
+    font-size: 14px;
+    font-weight: 500;
+}
+.m4p-contact-widget__switch-option input:checked + span {
+    background: var(--m4p-cw-accent);
+    color: #fff;
+}
+.m4p-contact-widget__switch-option input:focus-visible + span {
+    outline: 2px solid var(--m4p-cw-accent);
+    outline-offset: -4px;
+    box-shadow: inset 0 0 0 4px #fff;
 }
 .m4p-contact-widget__hp {
     position: absolute;
     left: -9999px;
 }
 .m4p-contact-widget__field-label {
-    display: block;
-    margin-bottom: 4px;
+    margin: 0 0 -4px;
+    color: var(--m4p-cw-text-2);
     font-size: 12px;
 }
-.m4p-contact-widget__input {
-    width: 100%;
-    margin-bottom: 10px;
-    padding: 8px 10px;
-}
-.m4p-contact-widget__consent {
+.m4p-contact-widget__row {
     display: flex;
     gap: 8px;
-    margin-bottom: 10px;
-    font-size: 12px;
 }
-.m4p-contact-widget__error {
-    color: #c62828;
+.m4p-contact-widget__input {
+    flex: 1;
+    height: 44px;
+    padding: 0 12px;
+    border: 1px solid var(--m4p-cw-line);
+    border-radius: var(--m4p-cw-radius-sm);
+    background: var(--m4p-cw-surface);
+    font: inherit;
+}
+.m4p-contact-widget__input[aria-invalid="true"] {
+    border-color: var(--m4p-cw-error);
 }
 .m4p-contact-widget__submit {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    width: 100%;
-    padding: 10px;
+    height: 44px;
+    padding: 0 16px;
+    border: 0;
+    border-radius: var(--m4p-cw-radius-sm);
+    background: var(--m4p-cw-accent);
+    color: #fff;
+    font: inherit;
+    font-weight: 600;
+    white-space: nowrap;
     cursor: pointer;
 }
-.m4p-contact-widget__done {
+.m4p-contact-widget__submit:disabled {
+    opacity: .6;
+    cursor: progress;
+}
+.m4p-contact-widget__consent {
     display: flex;
-    align-items: center;
-    gap: 10px;
+    align-items: flex-start;
+    gap: 8px;
+    margin: 0;
+    color: var(--m4p-cw-text-2);
+    font-size: 12px;
+    line-height: 1.4;
+}
+.m4p-contact-widget__consent input {
+    flex: none;
+    width: 16px;
+    height: 16px;
+    margin: 1px 0 0;
+    accent-color: var(--m4p-cw-accent);
+}
+.m4p-contact-widget__consent a {
+    color: var(--m4p-cw-accent);
+}
+.m4p-contact-widget .m4p-contact-widget__msg {
+    margin: 0;
+}
+.m4p-contact-widget .m4p-contact-widget__field-error {
+    margin: -4px 0 0;
+}
+.m4p-contact-widget__msg .m4p-msg__body {
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+}
+.m4p-contact-widget__msg .m4p-contact-widget__svg {
+    width: 20px;
+    height: 20px;
+    margin-top: 1px;
+    color: var(--m4p-cw-ok);
+}
+.m4p-contact-widget__msg.m4p-msg--danger .m4p-contact-widget__svg {
+    color: var(--m4p-cw-error);
+}
+.m4p-contact-widget__field-error .m4p-contact-widget__svg {
+    width: 16px;
+    height: 16px;
+    margin-top: 1px;
+}
+/* Fallback for themes without the m4p-msg component; :where() lets the theme's rules win. */
+:where(.m4p-contact-widget__msg) {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: var(--m4p-cw-radius-sm);
+    background: var(--m4p-cw-ok-wash);
+    font-size: 14px;
+}
+:where(.m4p-contact-widget__msg.m4p-msg--danger) {
+    background: var(--m4p-cw-error-wash);
+}
+:where(.m4p-contact-widget__field-error) {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    color: var(--m4p-cw-error);
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+/* Stepping aside for an element listed in the settings: hidden, not moved, so nothing else shifts. */
+.m4p-contact-widget.is-yielding .m4p-contact-widget__fab,
+.m4p-contact-widget.is-yielding .m4p-contact-widget__bubble {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+.m4p-contact-widget__fab,
+.m4p-contact-widget__bubble {
+    transition: opacity .2s ease-out, visibility .2s;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .m4p-contact-widget__panel:not([hidden]) {
+        animation: m4p-contact-up .18s ease-out;
+    }
+    @keyframes m4p-contact-up {
+        from {
+            opacity: 0;
+            transform: translateY(8px);
+        }
+    }
+}
+
+/* Phones: a square launcher, the panel as a sheet across the bottom of the screen. */
+@media (max-width: 575px) {
+    :where(.m4p-contact-widget) {
+        --m4p-cw-edge: 12px;
+    }
+    .m4p-contact-widget {
+        bottom: calc(var(--m4p-cw-edge) + var(--m4p-contact-offset) + var(--m4p-contact-offset-mobile, 0px) + env(safe-area-inset-bottom, 0px));
+    }
+    .m4p-contact-widget__fab {
+        position: relative;
+        width: 52px;
+        padding: 0;
+        justify-content: center;
+    }
+    .m4p-contact-widget__fab-label,
+    .m4p-contact-widget__fab-status {
+        display: none;
+    }
+    .m4p-contact-widget__fab .m4p-contact-widget__dot {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+    }
+    .m4p-contact-widget__panel {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: auto;
+        max-width: none;
+        max-height: 85vh;
+        border-radius: var(--m4p-cw-radius) var(--m4p-cw-radius) 0 0;
+        border-bottom: 0;
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    .m4p-contact-widget__done,
+    .m4p-contact-widget__form {
+        padding-bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+    }
+    .m4p-contact-widget.is-open .m4p-contact-widget__fab {
+        visibility: hidden;
+    }
+    @media (prefers-reduced-motion: no-preference) {
+        .m4p-contact-widget__panel:not([hidden]) {
+            animation-name: m4p-contact-sheet;
+        }
+        @keyframes m4p-contact-sheet {
+            from {
+                transform: translateY(24px);
+            }
+        }
+    }
 }

@@ -62,7 +62,7 @@ class M4p_ContactWidgetSubmitModuleFrontController extends ModuleFrontController
 
         // Honeypot: a real visitor never fills this hidden field; bots get a success and nothing is saved.
         if ((string) Tools::getValue('m4p_hp') !== '') {
-            $this->respond(true, $this->t('Thank you, we will contact you as soon as possible.'));
+            $this->respond(true, $this->successMessage());
         }
 
         $lastSubmitAt = (int) $this->context->cookie->m4p_contact_last_submit;
@@ -80,7 +80,7 @@ class M4p_ContactWidgetSubmitModuleFrontController extends ModuleFrontController
         $channel = (string) Tools::getValue('channel');
         $rawValue = trim((string) Tools::getValue('contact_value'));
 
-        if (!in_array($channel, ['phone', 'email'], true)) {
+        if (!in_array($channel, M4p_ContactWidget::formChannels(), true)) {
             $this->respond(false, $this->t('Invalid request.'));
         }
         if (!Tools::getValue('consent')) {
@@ -125,7 +125,7 @@ class M4p_ContactWidgetSubmitModuleFrontController extends ModuleFrontController
         $this->context->cookie->m4p_contact_last_submit = time();
         $this->context->cookie->write();
 
-        $this->respond(true, $this->t('Thank you, we will contact you as soon as possible.'));
+        $this->respond(true, $this->successMessage());
     }
 
     /**
@@ -233,6 +233,13 @@ class M4p_ContactWidgetSubmitModuleFrontController extends ModuleFrontController
         }
 
         return Tools::substr($url, 0, 512);
+    }
+
+    private function successMessage(): string
+    {
+        $message = trim((string) Configuration::get(M4p_ContactWidget::CFG_SUCCESS, (int) $this->context->language->id));
+
+        return $message !== '' ? $message : $this->t('Thank you, we will contact you as soon as possible.');
     }
 
     private function t(string $text): string
